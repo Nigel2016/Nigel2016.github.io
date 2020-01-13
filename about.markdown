@@ -30,5 +30,5 @@ I collaborated with a team of 5 developers to design and implement an unique vid
 What I love about computer science is that the field gives me the opportunity to work with diverse groups of people to solve
 substantial problems. Video game development in particiular has allowed for me to work with students across diverse disciplines 
 (music, art, design, and writing) to make interactive experiences that can be enjoyed by everyone. I hope to find work experiences
-where I  can collaborate with new people to make software that can be enjoyed by many people. 
+where I can collaborate with developers to make software that can be enjoyed by many people. 
 </p>
