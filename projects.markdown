@@ -15,13 +15,6 @@ permalink: /projects/
 
 ![The Magic Hat](/files/MagicHat.jpg/){:class="img-responsive"}
 
-Trailer:
-{: .bold}
-
-<figure class="video_container">
-  <iframe src="https://www.youtube.com/embed/IcuKVrImSZU" frameborder="0" allowfullscreen="true" width="500" height="400"> </iframe>
-</figure>
-
 Description:
 {: .bold}
 The Magic Hat is a 2D asymmetric two player game where an unlikely duo, a squirrel and a hedgehog, must return
@@ -51,4 +44,11 @@ C#
 Development Blog:
 {: .bold}
 
+Trailer:
+{: .bold}
+
 https://www.indiedb.com/members/nonsense-studios/articles
+
+<figure class="video_container">
+  <iframe src="https://www.youtube.com/embed/IcuKVrImSZU" frameborder="0" allowfullscreen="true" width="500" height="400"> </iframe>
+</figure>
