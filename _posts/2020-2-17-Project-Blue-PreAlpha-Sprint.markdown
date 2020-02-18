@@ -35,4 +35,4 @@ My main difficulty with writing the script was figure out which methods in unity
 
 Summary:
 
-Overall, this sprint went smoothly. I believe that I was given tasks which were clear in scope, and could be done within the tiem constrait of the sprint (2 weeks). The only downside was that I was not given much work to complete. This is understandable, since the project has only just finished its conceptual phase. As development ramps up, there will be an abundance of opportunities to contribute code and design to the game. 
+Overall, this sprint went smoothly. I believe that I was given tasks which were clear in scope, and could be done within the tiem constrait of the sprint (2 weeks). The only downside was that I was not given much work to complete. This is understandable, since the project has only just finished its conceptual phase. As development ramps up, there will be an abundance of opportunities to contribute code and design to the game.
