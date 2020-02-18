@@ -16,7 +16,6 @@ Design:
 For this sprint, I was tasked with drafting two enemy design concepts:
 
 * The first enemy, the Gungnir, is a range based thrower that challenges the player into mastering the game's signature mechanic. The player's main use of navigating through the game enviornment is a weapon teleportation technique, where they can throw their weapon and rapidly warp to its destination. The Gungnir throws high velocity projectiles at the player. The idea behind this enemy is that ordinary manuevers (jumping and running) cannot be used to avoid its attacks. The weapon teleport mechanic must be utilized in order to dodge the Gungnir's fast attacks and to get close enough to the enemy in order to defeat it. 
-//TODO: Insert image. 
 
 * The second enemy, the Sniper, is a slow moving enemy that defy's gravity and shoots homing projectiles at the player. Rather than sticking to the ground, the Sniper moves through the environment by utilizing portals to warp and flank the player from behind. They fire bursts of magic missiles which will target's its prey with great precision. The motivation behind this enemy is to give the player another practical means of using the weapon teleportation mechanic to outmaneuver and kill opponents. All the while, they are a relatively easy enemy to defeat once the player realizes they can deflect the enemies projectiles. An idea I had for this enemy is if the player warps into, and strikes the missiles, they can deflect the missiles back at the Sniper, and kill it instantly. 
 
