@@ -48,7 +48,7 @@ The script here will perform the rsync command every 10 seconds: it takes code i
 
 Moreover, the actual solution should look something like this: 
 
-![Movement](/files/rsync.png)
+![rsync](/files/rsync.PNG)
 
 The script must be ran as a process on the server where the website's repository is located. Rsync must be able to establish a connection with the web developer's computer, and pull any changes that the developer makes into the server repository. I will continue to work on this solution in the comming weeks, and will give an update in the next blog post. 
 
