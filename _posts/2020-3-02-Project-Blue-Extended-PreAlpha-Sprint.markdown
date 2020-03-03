@@ -27,5 +27,28 @@ In the dormant sage, we make sure that the enemy is not movement by zeroing out 
 
 Rsync Version Control:
 
-WIP
+Another tasks that I was assigned with recently is releated to DevOps. Currently, we have a web developer who is working on Project Blue's promotional website. 
+
+Whenever they write code to modify the website's interface, they have to manually add, commit, and send the changes that they make to the server which is hosting the website. My task was to research rsync, a file transfering tool avaliable in Linux systems, and come up with a solution that would automatically update the repository whenever the a change is made to it. To begin this task, I developed a script which allows for me to automatically send changes I make to my website repository to a repository belonging to my CAEN account (a computing resource provided to computer science students at the University of Michigan): 
+
+~~~
+#! /bin/bash
+
+DIRECTORY="~/test_project_blue"
+SOURCE="/mnt/c/users/123ch/Nigel2016.github.io/*"
+DESTINATION="ndcharle@oncampus-course.engin.umich.edu"
+
+while true; do
+    sudo rsync -ruve ssh ${SOURCE} ${DESTINATION}:${DIRECTORY}
+    sleep 10
+done
+~~~
+
+The script here will perform the rsync command every 10 seconds: it takes code in a source directory and attempts to send it to "${DESTINATION}:${DIRECTORY}." The only issue with this script is that "oncampus-course.engin.umich.edu" is a domain belonging to my University, and requires me to login using my CAEN password whenever I want to establish a connection. A better solution would require for this login process to be done automatically, if not skipped.
+
+Moreover, the actual solution should look something like this: 
+
+![Movement](/files/rsync.png)
+
+The script must be ran as a process on the server where the website's repository is located. Rsync must be able to establish a connection with the web developer's computer, and pull any changes that the developer makes into the server repository. I will continue to work on this solution in the comming weeks, and will give an update in the next blog post. 
 
