@@ -44,10 +44,11 @@ C#
 Development Blog:
 {: .bold}
 
+https://www.indiedb.com/members/nonsense-studios/articles
+
+
 Trailer:
 {: .bold}
-
-https://www.indiedb.com/members/nonsense-studios/articles
 
 <figure class="video_container">
   <iframe src="https://www.youtube.com/embed/IcuKVrImSZU" frameborder="0" allowfullscreen="true" width="500" height="400"> </iframe>
