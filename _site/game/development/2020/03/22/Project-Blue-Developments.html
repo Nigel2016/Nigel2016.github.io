@@ -76,7 +76,66 @@
 
 <p>In order to fix this issue, I used a function in Unity’s library called “StopAllCorountines()” which deactivates any coroutines that may be still running by the time the DeAggro event is triggered. If there happens to be no coroutines running, “StopAllCorountines()” does nothing. The inclusion of this function fixed the issue, and guarantees that no other coroutine overwites the state transition to IDLE.</p>
 
-<h1 id="acrobat-prefab">Acrobat prefab:</h1>
+<h1 id="acrobat-design-prefab-creation">Acrobat Design: Prefab Creation</h1>
+
+<p>For my next tasks, I created a prefab of the Acrobat enemy: a game object which contains all the properties necessary for the enemy to be functional in the game. The prefab will also allow for level designers to select and place multipe Acrobats in the level easily, with all of their stats configured and ready to go. The components of the acrobat can be described with the following hierarchy:</p>
+
+<p><img src="/files/DropperPrefab.PNG" alt="dropperPrefab" /></p>
+
+<p>One of the most important components to the Acrobat is its rigidbody. The rigidbody gives the enemy motion under Unity’s underlying physics engine. For the remaining components, I divided them into two child objects parented to the prefab:</p>
+
+<ul>
+  <li>
+    <p>View: This child contains an animator component which will be used to store animations made for the Acrobat. The other component is the sprite renderer, which will store the Acrobat’s appearance.</p>
+  </li>
+  <li>
+    <p>Aggro: This child contains the components necessary for the enemy to detect player movement and react. The EnemyAggro script requires a circle collider which, when the player hits it, will cause the script to fire a Unity event. This event can be used to activate functions contained in the AcrobatAI script that executes the enemy’s movement behavior. In addition, the “FlyingCharacterScript” is used to actually move the Acrobat, given an (x,y) velocity.</p>
+  </li>
+</ul>
+
+<p>The prefab makes placing Acrobats in the game’s levels easier. Designers can also configure public variables tied to each of the componenets in order to adjust an enemy’s behavior (aattack speed, aggro collider width, etc.)</p>
+
+<h1 id="acrobat-design-tuning-behaviors">Acrobat Design: Tuning behaviors</h1>
+
+<p>My next assignment with the Acrobat was to fine tune the acrobat prefab. I had to determine what the right level of difficulty should be for the acrobat; I adjusted its prefab properties in order so that the acrobat’s interactions with the player are fair and balanced. In addition, I had to figure out what the right level placements for an acrobat enemy should be.</p>
+
+<p>Starting with the level layout, I drew out several possiblities and assessed how ideal they would be in the final game. My criteria for idealness are: What placement would allow for the enemy to most effectively challenge the player? Which placement makes since given the implmentation of the Acrobat’s AI script, and the design specification?</p>
+
+<p><img src="/files/OptimalAcrobatPlacement.PNG" alt="dropperPrefab" /></p>
+
+<p>1) The enemy is attached to a ceiling which hangs below the player. This is the placement initially proposed in the acrobat’s design specification.</p>
+
+<p><img src="/files/SideBySidePlacementAcrobat.PNG" alt="dropperPrefab" /></p>
+
+<p>2) The enemy could be attached to walls side by side, and can essentially be used to ambush a player as their fall down a long corridor.</p>
+
+<p><img src="/files/SuboptimalPlacementAcrobat.PNG" alt="dropperPrefab" /></p>
+
+<p>3) The acrobat could be placed at the same level as the player, and attack them face to face.</p>
+
+<p>I determined that the best acrobat placement would be 1). This made the most sense given the intial design of the Acrobat, which aimed to create an enemy which promoted player anticipation and movement. By having the enemy on the ceiling, it would prompt the player to be alert of their surrounds, and to ready their reflexes in order to antipate an attack. This placement would also allow for multiple acrobats to placed in groups, and ing the player to defeat groups of enemies using the warping mechanic.</p>
+
+<p>2) Would not work as well: The acrobat’s would only have one attempt to attack the player before it reaches the end of the corridor. It also does not present a challenge to the player, in that they would be able to skip the encounter without using the weapon teleportation mechanic.</p>
+
+<p>3) Is not ideal. The Acrobat’s repose would not work: if the player is heading towards the acrobat, the next avaliable wall to repose from would be too far away. In other words, the player could simply jump over the acrobat, and skip the fight encounter entirely. There is also an issue with grouping acrobats with this placment. if all the acrobats are side to side with this placement, then they are more likely to collide with each other, and create akward fight encounters with the player.</p>
+
+<p><img src="/files/PrefabEditing.PNG" alt="dropperPrefabEditing" /></p>
+
+<p>To further tune the enemy, I adjusted several properties of its prefab:</p>
+
+<ul>
+  <li>
+    <p>The gravity scale and drag properties on the prefab’s rigidbody were set to 0. This allows for the acrobat to not be effected by gravity while it hangs on the wall, and lerps to attack the player’s recent location.</p>
+  </li>
+  <li>
+    <p>The cooldown timers that delay the transtion from an acrobat’s attack and repose were both set to 2 seconds. I found these settings were the best so that the enemy could still aggressively attack the player, bbut give them enough time to react.</p>
+  </li>
+  <li>
+    <p>On the Aggro child object, I set the circle collider’s radius to 10. This was the most ideal setting for having acrobats grouped together in large, open spaces. For tighter spaces, the designers will be able to lower the aggro range as they see fit.</p>
+  </li>
+</ul>
+
+<p>Overall, I felt these changes would make the acrobat a more effective enemy. However, playtesting is necessary to see how the player interacts with the enmy. From there, more precise changes can be made to the prefab in order to balance its difficulty.</p>
 
   </div><a class="u-url" href="/game/development/2020/03/22/Project-Blue-Developments.html" hidden></a>
 </article>
