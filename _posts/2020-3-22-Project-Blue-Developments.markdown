@@ -7,7 +7,7 @@ categories: game development
 
 For this development sprint, I contributed to the AI of the Dropper enemy, created a prefab for another enemy in production, and did fine tuning on the Acrobat prefab. I adjusted the acrobats properties (speed and aggro settings) so that it is at the right level of difficulty. 
 
-Dropper AI:
+Dropper AI: (15 hours)
 ==================
 
 My main assignment for the past week was to develop the movement script for the Dropper enemy: 
@@ -36,7 +36,7 @@ The issue with the DeAggro event was that if another coroutine was waiting to re
 
 In order to fix this issue, I used a function in Unity's library called "StopAllCorountines()" which deactivates any coroutines that may be still running by the time the DeAggro event is triggered. If there happens to be no coroutines running, "StopAllCorountines()" does nothing. The inclusion of this function fixed the issue, and guarantees that no other coroutine overwites the state transition to IDLE. 
 
-Acrobat Design: Prefab Creation
+Acrobat Design: Prefab Creation (5 hours)
 ==================
 
 For my next tasks, I created a prefab of the Acrobat enemy: a game object which contains all the properties necessary for the enemy to be functional in the game. The prefab will also allow for level designers to select and place multipe Acrobats in the level easily, with all of their stats configured and ready to go. The components of the acrobat can be described with the following hierarchy: 
@@ -51,7 +51,7 @@ One of the most important components to the Acrobat is its rigidbody. The rigidb
 
 The prefab makes placing Acrobats in the game's levels easier. Designers can also configure public variables tied to each of the componenets in order to adjust an enemy's behavior (aattack speed, aggro collider width, etc.)
 
-Acrobat Design: Tuning behaviors
+Acrobat Design: Tuning behaviors (10 hours)
 ==================
 
 My next assignment with the Acrobat was to fine tune the acrobat prefab. I had to determine what the right level of difficulty should be for the acrobat; I adjusted its prefab properties in order so that the acrobat's interactions with the player are fair and balanced. In addition, I had to figure out what the right level placements for an acrobat enemy should be. 
