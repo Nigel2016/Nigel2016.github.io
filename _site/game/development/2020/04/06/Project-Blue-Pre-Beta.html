@@ -121,19 +121,26 @@ The Acrobat is an enemy which has two movement behaviors: Leap and Repose. When 
 
 <p>However, an issue shows up when the player collides with the enemy in midair: with my attempted implementation, the enemy will begin to move down but will stop when it reaches the y-axis of the player. This results in the Acrobat becoming stuck in midair and within the environment background:</p>
 
+<div style="width:100%;height:0;padding-bottom:49%;position:relative;"><iframe src="https://giphy.com/embed/YrAw2xmYms6biUhUOL" width="100%" height="100%" style="position:absolute" frameborder="0" class="giphy-embed" allowfullscreen=""></iframe></div>
+<p><a href="https://giphy.com/gifs/YrAw2xmYms6biUhUOL">via GIPHY</a></p>
+
 <p>If there was a way to calculate the endpoint, such that we knew ahead of time where the best place for the Acrobat to land after being knocked back, then this issue would be solved by calculating P2 = (the desired x, desired y). However, without knowing where the level designers will place the acrobat, and no functions available in the unity library (from my knowledge), this would not be possible.</p>
 
 <p>For the sake of getting my task done on time, I ended up using Unity’s physic’s engine to implement the knockback mechanic:</p>
 
-<p>Upon colliding with the player, I calculated the direction of the impact within Unity’s OnCollisionEnter function. From here, I define a new state to transition the enemy to KNOCKBACK. In this state, I apply a constant force in the opposite direction of the collision, throughout several frames. As a result, a rough, but functional, knockback is achieved:</p>
+<div style="width:100%;height:0;padding-bottom:49%;position:relative;"><iframe src="https://giphy.com/embed/mC0fnqvJ82D40Qd4Cs" width="100%" height="100%" style="position:absolute" frameborder="0" class="giphy-embed" allowfullscreen=""></iframe></div>
+<p><a href="https://giphy.com/gifs/mC0fnqvJ82D40Qd4Cs">via GIPHY</a></p>
 
-<p>I modified my finite state diagram to incorporate the KNOCKBACK state:</p>
+<p>Upon colliding with the player, I calculated the direction of the impact within Unity’s OnCollisionEnter function. From here, I define a new state to transition the enemy to KNOCKBACK. In this state, I apply a constant force in the opposite direction of the collision, throughout several frames. As a result, a rough, but functional, knockback is achieved.</p>
 
 <p>While implementing this functionality, I had to spend several hours debugging the Acrobat’s movement behaviors. One of the major issues I faced with this script was applying the force onto Acrobat over several frames. I struggled with multiple bugs, including the Acrobat’s movement being broken after one leap, as well as an issue with the force not being applied at all. Most of these issues came down to making sure that the script’s internal variables were updated to enable the acrobat to transition back to the REPOSE state after the knockback is complete. I also resolved an issue where the Acrobat could lose aggro while being knocked back. Overall, using the 2D physics engine was straightforward, and the knockback works well. However, I will continue to improve upon the Acrobat’s functionality in the coming weeks leading up the project’s “Gold” deliverable.</p>
 
 <h1 id="side-by-side-acrobat-3-hours">Side-By-Side Acrobat (3 hours):</h1>
 
 <p>As an additional task, I modified my Acrobat script so that it could move the Acrobat Side-by-Side, instead of moving from ceiling to floor:</p>
+
+<div style="width:100%;height:0;padding-bottom:50%;position:relative;"><iframe src="https://giphy.com/embed/QW9KJ6aXPmchvpQCyc" width="100%" height="100%" style="position:absolute" frameborder="0" class="giphy-embed" allowfullscreen=""></iframe></div>
+<p><a href="https://giphy.com/gifs/QW9KJ6aXPmchvpQCyc">via GIPHY</a></p>
 
 <p>The side by side functionality can be activated by level designers in the unity editor; a public boolean can be checked which enables the Acrobat to move in this way. This could be useful for placing the Acrobat in narrow pits, as a trap to players. However, if the player collides with the enemy, then it would fall to the ground due to the knockback implementation. To address this issue, I spoke to one of the WolvenSoft Studio leads; he suggested making the Acrobat’s 2D box collider into a trigger. This would prevent the Acrobat from being moved by the player: and would allow for it to perform its movement behaviors without being interrupted by any other physical object. However, some tweaking to the prefab (and potentially some code changes) may be necessary to get this working. I will attempt to implement this feature in the next sprint and will discuss its results (successful or not) in the next blog post.</p>
 
