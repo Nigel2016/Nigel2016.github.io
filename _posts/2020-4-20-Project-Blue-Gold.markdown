@@ -63,4 +63,32 @@ This bug made the Acrobat frustrating to fight during the Wolverinsoft Studio pl
 
 I spent several hours attempting to get the trigger collider code to better detect Terrain. I tried using the Unity library's "IsTouching" function to prevent non-player objects from triggering the Acrobat collider. In addition, I put in tag comparisions in order to detect the type of object which triggered the Acrobat: upon hitting an object tagged as "Terrain" or "Hazard", I would set the acrobat's velocity to zero. However, these changes were not enough to consistently prevent the Acrobat's from penetrating the terrain. 
 
-With the final deadline looming, and after several failed attempts, I ended up switch the acrobat's collider back into a default box collider. The default box collider works better thna
+With the final deadline looming, and after several failed attempts, I ended up reverting the Acrobat's collider into a default one. Having the Acrobat as a trigger turned out to be more problematic for physics with the environment, and was ultimately too difficult for me to get working within the project's time constraints. 
+
+Acrobat: Fixing Unpredictability
+==================
+
+Another piece of feedback that I recieved during the studio's playtest session was that the Acrobat's movement behaviors were too unpredictable. Upon leaping to the player, the Acrobat would repose back to the ceiling, diagonally in the player's direction:
+
+![OriginalImplementation](/files/NearestCeiling.PNG)
+
+ While this made the enemy with challenging behavior for the player to overcome, it ultimately proved to be more of an annoyance to players. Without a way to determine where the Acrobat would move next, the player's became frustrated with the enemy, and ended up skipping them all together.
+
+<div style="width:100%;height:0;padding-bottom:57%;position:relative;"><iframe src="https://giphy.com/embed/hogR4W4fEl2iN951pq" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/hogR4W4fEl2iN951pq">via GIPHY</a></p>
+
+After discussing this issue with my team lead, I decided to go back to a previous implementation of the Acrobats repose movement: instead of leaping in a direction towards the player, the enemy would simply return to its origin location in the environment: 
+
+After implementing this change, I realized that consistent attack patterns were key to having a fun enemy AI to fight against. Consistent movement allows for the player to anticipate attacks, anaylze them, and then react to them in a swift manner. The previous implementation made the Acrobat more irradicaly, and resulted in a negative player experience overall. 
+
+Acrobat: Smoother Movement, and syncing state
+==================
+
+In addition to making the Acrobat's movement more consistent, I working on making the Acrobat's movements smoother. Previously, the Acrobat would suddenly attack the player, charging at them at a high speed. This would give the player little time to react to the attack, and prevent them from counterattacking before the enemy decides to repose back to tthe ceiling. While looking up how to implement this online, I came across a nice formula that worked well: 
+
+~~~~~~~~~~~~
+enemyScript.desiredVelocity = (location)  * speed * Time.fixedDeltaTime;
+~~~~~~~~~~~~
+
+To set the enemy's velocity, I took the location I wanted the Acrobat to move in, and amplified it by a speed constant. What is ket to making the Acrobat's movement feel gradual is Time.fixedDeltaTime. This variable gives an interval, in seconds, at which physics in the game are running. by multiplying the velocity by this variable, this allows for the velocity to be applied over time, as apposed to being done at an instant.
+
+Moreover, I took the opportunity to iron out some difficult bugs I have noticed in the 
