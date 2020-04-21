@@ -54,3 +54,13 @@ After fixing the bug with the Acrobat's aggro, I had to ensure that the Acrobats
 
 Acrobat AI Iteration: (25 hours)
 ==================
+
+A few weeks ago, I changed the Acrobat's prefab collider into a trigger. This change was intended to improve the collisions that the enemy would have with the player. If the object were a trigger, it would stop the player from moving the Acrobat and interrupting its movement patterns. However, while this seemed to work decently when I first implemented it, my change was later found to be buggy. The acrobats would frequently fly through the Crystal Cave's terrain, while attack the player from unexpected angles:
+
+<div style="width:100%;height:0;padding-bottom:57%;position:relative;"><iframe src="https://giphy.com/embed/l1Bn7XpAq0QVOtUUDH" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/l1Bn7XpAq0QVOtUUDH">via GIPHY</a></p>
+
+This bug made the Acrobat frustrating to fight during the Wolverinsoft Studio playtests. Moreover, I did not intend for this issue to occur: at the time that I tested the change, I was unable to reproduce such a jarring bug. For the remainder of the Studio's gold sprint, the last deliverable before the game was released, I spent a significant amount of time fixing this bug, and improving upon the movement patterns of the Acrobat.
+
+I spent several hours attempting to get the trigger collider code to better detect Terrain. I tried using the Unity library's "IsTouching" function to prevent non-player objects from triggering the Acrobat collider. In addition, I put in tag comparisions in order to detect the type of object which triggered the Acrobat: upon hitting an object tagged as "Terrain" or "Hazard", I would set the acrobat's velocity to zero. However, these changes were not enough to consistently prevent the Acrobat's from penetrating the terrain. 
+
+With the final deadline looming, and after several failed attempts, I ended up switch the acrobat's collider back into a default box collider. The default box collider works better thna

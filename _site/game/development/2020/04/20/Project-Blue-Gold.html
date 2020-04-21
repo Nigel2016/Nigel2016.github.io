@@ -58,11 +58,11 @@
 
 <p><img src="/files/AcrobatTriggeringIssues.PNG" alt="TriggerIssues" /></p>
 
-<p>Something outside of the Acrobat script was causing it not to move. The only component apart of the prefab that could be problematic is the Aggro object. On this object, the trigger which allows for the Acrobat to move upon detecting the player.</p>
+<p>Something outside of the Acrobat script was causing it not to move. The only component on the prefab that could be problematic is the Aggro child.</p>
 
 <p><img src="/files/AcrobatAggroObject.PNG" alt="Aggro" /></p>
 
-<p>While reviewing these settings, I noticed that there was a variable named “Raycast Line of Sight” which I paid no attention to while working on the Acrobat. I began to suspect that either this setting, or the Raycast Layer Mask, was causing tthe Acrobat to not move. These variables belong to the EnemyAggro script, which contains logic for how the enemy uses its circle collider to detect players. Which looking over the code, I found a problematic section that could cause the issue:</p>
+<p>While reviewing the Aggro object’s settings, I noticed that there was a variable named “Raycast Line of Sight” which I paid no attention to while working on the Acrobat. I began to suspect that either this setting, or the Raycast Layer Mask, was causing tthe Acrobat to not move. These variables belong to the EnemyAggro script, which contains logic for how the enemy uses its circle collider to detect players. Which looking over the code, I found a problematic section that could cause the issue:</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    private void OnTriggerEnter2D(Collider2D other) {
         // Invoke OnAggro when the player enters the enemy's trigger or enter search mode
@@ -82,8 +82,27 @@
     }
 </code></pre></div></div>
 
-<p>Due to several project deadlines that came up in my other classes, I did not have time to completely understand the enemyAggro code. However, it appears that by having the raycastLineOfSight variable on, the script is unable to obtain a reference to the Acrobat’s target (which is the player). After turning this variable off, the Acrobat’s in teh level began to move again:</p>
+<p>Due to several project deadlines that came up in my other classes, I did not have time to completely understand the enemyAggro code. However, it appears that by having the raycastLineOfSight variable on, the script is unable to obtain a reference to the Acrobat’s target (which is the player). After turning this variable off, the Acrobat’s in the level began to move again:</p>
 
+<div style="width:100%;height:0;padding-bottom:57%;position:relative;"><iframe src="https://giphy.com/embed/j03uuJLlkwiD7BDH9E" width="100%" height="100%" style="position:absolute" frameborder="0" class="giphy-embed" allowfullscreen=""></iframe></div>
+<p><a href="https://giphy.com/gifs/j03uuJLlkwiD7BDH9E">via GIPHY</a></p>
+
+<p>It is likely that this setting was intended for an enemy which actively patrols for the player: the stalker, for instance, will move back and forth in a segment of the level until it finds a player to attack. The Acrobat, on the other hand, remains idle on the ceiling until a player enters its aggro range. I was reliving that this was the only issue causing the Acrobat to not move.</p>
+
+<p>After fixing the bug with the Acrobat’s aggro, I had to ensure that the Acrobats in the official scene, known as the Crystal Cave, behaved appropriately. After my fix was merged into the development branch, I immediately went into the crystal cave’s scene, and turned off the raycast variable on all the Acrobats. Overall, while frustrating, it was overall straightforward to fix.</p>
+
+<h1 id="acrobat-ai-iteration-25-hours">Acrobat AI Iteration: (25 hours)</h1>
+
+<p>A few weeks ago, I changed the Acrobat’s prefab collider into a trigger. This change was intended to improve the collisions that the enemy would have with the player. If the object were a trigger, it would stop the player from moving the Acrobat and interrupting its movement patterns. However, while this seemed to work decently when I first implemented it, my change was later found to be buggy. The acrobats would frequently fly through the Crystal Cave’s terrain, while attack the player from unexpected angles:</p>
+
+<div style="width:100%;height:0;padding-bottom:57%;position:relative;"><iframe src="https://giphy.com/embed/l1Bn7XpAq0QVOtUUDH" width="100%" height="100%" style="position:absolute" frameborder="0" class="giphy-embed" allowfullscreen=""></iframe></div>
+<p><a href="https://giphy.com/gifs/l1Bn7XpAq0QVOtUUDH">via GIPHY</a></p>
+
+<p>This bug made the Acrobat frustrating to fight during the Wolverinsoft Studio playtests. Moreover, I did not intend for this issue to occur: at the time that I tested the change, I was unable to reproduce such a jarring bug. For the remainder of the Studio’s gold sprint, the last deliverable before the game was released, I spent a significant amount of time fixing this bug, and improving upon the movement patterns of the Acrobat.</p>
+
+<p>I spent several hours attempting to get the trigger collider code to better detect Terrain. I tried using the Unity library’s “IsTouching” function to prevent non-player objects from triggering the Acrobat collider. In addition, I put in tag comparisions in order to detect the type of object which triggered the Acrobat: upon hitting an object tagged as “Terrain” or “Hazard”, I would set the acrobat’s velocity to zero. However, these changes were not enough to consistently prevent the Acrobat’s from penetrating the terrain.</p>
+
+<p>With the final deadline looming, and after several failed attempts, I ended up switch the acrobat’s collider back into a default box collider. The default box collider works better thna</p>
 
   </div><a class="u-url" href="/game/development/2020/04/20/Project-Blue-Gold.html" hidden></a>
 </article>
