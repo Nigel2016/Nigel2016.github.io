@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Io: Script Iteration | Nigel Charleston - Programmer</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Io: Script Iteration" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The gold sprint is the Final deliverable for Project Blue, now known officially as Io. During the entire sprint, I spent the entirety of my time iterating upon my implementation of the Acrobat AI script." />
+<meta property="og:description" content="The gold sprint is the Final deliverable for Project Blue, now known officially as Io. During the entire sprint, I spent the entirety of my time iterating upon my implementation of the Acrobat AI script." />
+<link rel="canonical" href="http://localhost:4000/game/development/2020/04/20/Project-Blue-Gold.html" />
+<meta property="og:url" content="http://localhost:4000/game/development/2020/04/20/Project-Blue-Gold.html" />
+<meta property="og:site_name" content="Nigel Charleston - Programmer" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-20T00:00:00-04:00" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Io: Script Iteration","dateModified":"2020-04-20T00:00:00-04:00","datePublished":"2020-04-20T00:00:00-04:00","url":"http://localhost:4000/game/development/2020/04/20/Project-Blue-Gold.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/game/development/2020/04/20/Project-Blue-Gold.html"},"description":"The gold sprint is the Final deliverable for Project Blue, now known officially as Io. During the entire sprint, I spent the entirety of my time iterating upon my implementation of the Acrobat AI script.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Nigel Charleston - Programmer" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Nigel Charleston - Programmer</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about.html">About Me</a><a class="page-link" href="/projects/">Projects</a><a class="page-link" href="/files/Nigel_Charleston_Resume_New.pdf">Resume</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Io: Script Iteration</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2020-04-20T00:00:00-04:00" itemprop="datePublished">Apr 20, 2020
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>The gold sprint is the Final deliverable for Project Blue, now known officially as Io. During the entire sprint, I spent the entirety of my time iterating upon my implementation of the Acrobat AI script.</p>
+
+<h1 id="acrobats-not-triggering-5-hours">Acrobat’s Not Triggering: (5 hours)</h1>
+
+<p>In the beta build of the game, it was descovered by one of the lead developers for the studio that the Acrobat enemies in the level would not move. When the player reached the Aggro range of the Acrobat, it would take no action:</p>
+
+<div style="width:100%;height:0;padding-bottom:57%;position:relative;"><iframe src="https://giphy.com/embed/M9lZJO8oNKibT4Y5mw" width="100%" height="100%" style="position:absolute" frameborder="0" class="giphy-embed" allowfullscreen=""></iframe></div>
+<p><a href="https://giphy.com/gifs/M9lZJO8oNKibT4Y5mw">via GIPHY</a></p>
+
+<p>This bug was very frustrating for me to hear about. In my local development scene, the Acrobat appeared to be working fine. However, I realized that my development scene could have been out of date with the official scene for the game. In order to figure out this issue, I first reviewed my acrobat movement code, making sure I did not accidently add a change that would prevent the enemy from moving. I placed several debug statements in my code that would print information regarding the internal state of the Acrobat. From the statements that I saw, I could confirm that the coroutines I set up to move the Acrobat were not activating.</p>
+
+<p><img src="/files/AcrobatTriggeringIssues.PNG" alt="TriggerIssues" /></p>
+
+<p>Something outside of the Acrobat script was causing it not to move. The only component apart of the prefab that could be problematic is the Aggro object. On this object, the trigger which allows for the Acrobat to move upon detecting the player.</p>
+
+<p><img src="/files/AcrobatAggroObject.PNG" alt="Aggro" /></p>
+
+<p>While reviewing these settings, I noticed that there was a variable named “Raycast Line of Sight” which I paid no attention to while working on the Acrobat. I began to suspect that either this setting, or the Raycast Layer Mask, was causing tthe Acrobat to not move. These variables belong to the EnemyAggro script, which contains logic for how the enemy uses its circle collider to detect players. Which looking over the code, I found a problematic section that could cause the issue:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    private void OnTriggerEnter2D(Collider2D other) {
+        // Invoke OnAggro when the player enters the enemy's trigger or enter search mode
+        if(other.gameObject.CompareTag("Player"))
+        {
+
+            if (raycastLineOfSight)
+            {
+                isSearching = true;
+            }
+            else
+            {
+                target = other.gameObject;
+                OnAggro.Invoke();
+            }
+        }
+    }
+</code></pre></div></div>
+
+<p>Due to several project deadlines that came up in my other classes, I did not have time to completely understand the enemyAggro code. However, it appears that by having the raycastLineOfSight variable on, the script is unable to obtain a reference to the Acrobat’s target (which is the player). After turning this variable off, the Acrobat’s in teh level began to move again:</p>
+
+
+  </div><a class="u-url" href="/game/development/2020/04/20/Project-Blue-Gold.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Nigel Charleston - Programmer</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Nigel Charleston - Programmer</li><li><a class="u-email" href="mailto:ndcharle@umich.edu">ndcharle@umich.edu</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/Nigel2016"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">Nigel2016</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>This is Nigel Charleston&#39;s Portfolio</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

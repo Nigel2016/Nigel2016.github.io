@@ -1,4 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-07T01:15:19-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Nigel Charleston - Programmer</title><subtitle>This is Nigel Charleston's Portfolio</subtitle><entry><title type="html">Project Blue: Acrobat Collisions and AI Improvement</title><link href="http://localhost:4000/game/development/2020/04/06/Project-Blue-Pre-Beta.html" rel="alternate" type="text/html" title="Project Blue: Acrobat Collisions and AI Improvement" /><published>2020-04-06T00:00:00-04:00</published><updated>2020-04-06T00:00:00-04:00</updated><id>http://localhost:4000/game/development/2020/04/06/Project-Blue-Pre-Beta</id><content type="html" xml:base="http://localhost:4000/game/development/2020/04/06/Project-Blue-Pre-Beta.html">&lt;p&gt;Over the past few weeks, I focused my efforts on improving the Acrobat enemy. I improved the Acrobat’s repose mechanic so that it will move to a nearby ceiling after attacking the player. I also wrote code that allows the Acrobat that to move side by side (instead of from floor to ceiling), as well as a basic collision and bounce back when the Acrobat collides with the player.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2020-04-20T21:19:24-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Nigel Charleston - Programmer</title><subtitle>This is Nigel Charleston's Portfolio</subtitle><entry><title type="html">Io: Script Iteration</title><link href="http://localhost:4000/game/development/2020/04/20/Project-Blue-Gold.html" rel="alternate" type="text/html" title="Io: Script Iteration" /><published>2020-04-20T00:00:00-04:00</published><updated>2020-04-20T00:00:00-04:00</updated><id>http://localhost:4000/game/development/2020/04/20/Project-Blue-Gold</id><content type="html" xml:base="http://localhost:4000/game/development/2020/04/20/Project-Blue-Gold.html">&lt;p&gt;The gold sprint is the Final deliverable for Project Blue, now known officially as Io. During the entire sprint, I spent the entirety of my time iterating upon my implementation of the Acrobat AI script.&lt;/p&gt;
+
+&lt;h1 id=&quot;acrobats-not-triggering-5-hours&quot;&gt;Acrobat’s Not Triggering: (5 hours)&lt;/h1&gt;
+
+&lt;p&gt;In the beta build of the game, it was descovered by one of the lead developers for the studio that the Acrobat enemies in the level would not move. When the player reached the Aggro range of the Acrobat, it would take no action:&lt;/p&gt;
+
+&lt;div style=&quot;width:100%;height:0;padding-bottom:57%;position:relative;&quot;&gt;&lt;iframe src=&quot;https://giphy.com/embed/M9lZJO8oNKibT4Y5mw&quot; width=&quot;100%&quot; height=&quot;100%&quot; style=&quot;position:absolute&quot; frameborder=&quot;0&quot; class=&quot;giphy-embed&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a href=&quot;https://giphy.com/gifs/M9lZJO8oNKibT4Y5mw&quot;&gt;via GIPHY&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This bug was very frustrating for me to hear about. In my local development scene, the Acrobat appeared to be working fine. However, I realized that my development scene could have been out of date with the official scene for the game. In order to figure out this issue, I first reviewed my acrobat movement code, making sure I did not accidently add a change that would prevent the enemy from moving. I placed several debug statements in my code that would print information regarding the internal state of the Acrobat. From the statements that I saw, I could confirm that the coroutines I set up to move the Acrobat were not activating.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/files/AcrobatTriggeringIssues.PNG&quot; alt=&quot;TriggerIssues&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Something outside of the Acrobat script was causing it not to move. The only component apart of the prefab that could be problematic is the Aggro object. On this object, the trigger which allows for the Acrobat to move upon detecting the player.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/files/AcrobatAggroObject.PNG&quot; alt=&quot;Aggro&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;While reviewing these settings, I noticed that there was a variable named “Raycast Line of Sight” which I paid no attention to while working on the Acrobat. I began to suspect that either this setting, or the Raycast Layer Mask, was causing tthe Acrobat to not move. These variables belong to the EnemyAggro script, which contains logic for how the enemy uses its circle collider to detect players. Which looking over the code, I found a problematic section that could cause the issue:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    private void OnTriggerEnter2D(Collider2D other) {
+        // Invoke OnAggro when the player enters the enemy's trigger or enter search mode
+        if(other.gameObject.CompareTag(&quot;Player&quot;))
+        {
+
+            if (raycastLineOfSight)
+            {
+                isSearching = true;
+            }
+            else
+            {
+                target = other.gameObject;
+                OnAggro.Invoke();
+            }
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Due to several project deadlines that came up in my other classes, I did not have time to completely understand the enemyAggro code. However, it appears that by having the raycastLineOfSight variable on, the script is unable to obtain a reference to the Acrobat’s target (which is the player). After turning this variable off, the Acrobat’s in teh level began to move again:&lt;/p&gt;</content><author><name></name></author><summary type="html">The gold sprint is the Final deliverable for Project Blue, now known officially as Io. During the entire sprint, I spent the entirety of my time iterating upon my implementation of the Acrobat AI script.</summary></entry><entry><title type="html">Project Blue: Acrobat Collisions and AI Improvement</title><link href="http://localhost:4000/game/development/2020/04/06/Project-Blue-Pre-Beta.html" rel="alternate" type="text/html" title="Project Blue: Acrobat Collisions and AI Improvement" /><published>2020-04-06T00:00:00-04:00</published><updated>2020-04-06T00:00:00-04:00</updated><id>http://localhost:4000/game/development/2020/04/06/Project-Blue-Pre-Beta</id><content type="html" xml:base="http://localhost:4000/game/development/2020/04/06/Project-Blue-Pre-Beta.html">&lt;p&gt;Over the past few weeks, I focused my efforts on improving the Acrobat enemy. I improved the Acrobat’s repose mechanic so that it will move to a nearby ceiling after attacking the player. I also wrote code that allows the Acrobat that to move side by side (instead of from floor to ceiling), as well as a basic collision and bounce back when the Acrobat collides with the player.&lt;/p&gt;
 
 &lt;h1 id=&quot;acrobat-ai-better-repose-15-hours-significant-time-debugging&quot;&gt;Acrobat AI: Better Repose (15 Hours) (significant time debugging)&lt;/h1&gt;
 
