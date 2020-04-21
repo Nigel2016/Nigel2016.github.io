@@ -91,4 +91,21 @@ enemyScript.desiredVelocity = (location)  * speed * Time.fixedDeltaTime;
 
 To set the enemy's velocity, I took the location I wanted the Acrobat to move in, and amplified it by a speed constant. What is ket to making the Acrobat's movement feel gradual is Time.fixedDeltaTime. This variable gives an interval, in seconds, at which physics in the game are running. by multiplying the velocity by this variable, this allows for the velocity to be applied over time, as apposed to being done at an instant.
 
-Moreover, I took the opportunity to iron out some difficult bugs I have noticed in the 
+Moreover, I took the opportunity to find fixes to some difficult bugs I have noticed in the Acrobat since implementing its behavior. One of these issues is as follows: sometimes, while reposing, the Acrobat would sometimes jolt in the direction of the player while completing its repose action. I was unable to exactly pinpoint what was causing this issue. However, I began to suspect that it was caused due to synchonization issues with the coroutines in my AI script. 
+
+![sync](/files/MultiCoroutines.PNG)
+
+Within the AI script, It used to be possible for multiple coroutines to run at the same time. If two coroutines are running, and both of them modify the same data, it is possible for one to overwrite the changes made by another coroutine before it can return. Due to this, the Acrobat would sometimes change its state before completing the previous one, leading to inconsistent behavior. To ensure that no coroutine is overwriting each other, I use the "StopAllCoroutines" function in Unity before running any new coroutine. As a result, the issue mentioned above did not occur anymore.
+
+The last sigificant issue I fixed with the Acrobat deals with the case where the player leaves its (Acrobat) Aggro range, but immediately comes back to it. Prior to my changes, the Acrobat would immediately attack the player again in midair:
+
+![Midair](/files/AcrobatSwoop.PNG)
+
+Ideally, the Acrobat would complete its previous state prior to reengaging with the player. To support this, I made a seperate coroutine dedicated to returning the Acrobat to its original location (called ReturnToOrigin). Now, when the Acrobat is initialized by the BecomeActive function, it will check to see if the enemy is at origin. If it is not, ReturnToOrigin is called. Within this function, it does not complete until the distance between the enemy and its initial location is close enough to be considered reached:
+
+<div style="width:100%;height:0;padding-bottom:57%;position:relative;"><iframe src="https://giphy.com/embed/Lqa9xtIhClHOQaiPkY" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/Lqa9xtIhClHOQaiPkY">via GIPHY</a></p>
+
+Summary
+==================
+
+Overall, working for the studio was an amazing experience. I got to collaborate with students accross multiple disciplines and was able to contribute to a game from start to finish. It was defintely challenging at times: iin many cases, I was stuck for multiple hours at a time trying to implement a feature. Although I had a clear understanding of the aspect of the Acrobat, coming up with the code to implement the Acrobat was challenging at times, and I was often stuck for several hours at a time attempting to figure out how to program a certain feature. However, I believe that this is soley due to my inexperience, and that I will have to continue making games in order to improve my skills. 
