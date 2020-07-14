@@ -69,7 +69,7 @@
 							</p>
 							<p>
 								While reviewing the Aggro object's settings, I noticed that there was a variable named "Raycast Line of Sight," which I paid no attention to while working on the Acrobat. 
-								I began to suspect that either this setting, or the Raycast Layer Mask, was causing the Acrobat to not move. These variables belong to the EnemyAggro script, 
+								It was either this setting, or the Raycast Layer Mask, was causing the Acrobat to not move. These variables belong to the EnemyAggro script, 
 								which contains logic for how the enemy uses its circle collider to detect players. Which looking over the code, I found a problematic section that could cause the issue: 
 <pre><code>
 private void OnTriggerEnter2D(Collider2D other) {
@@ -142,13 +142,13 @@ private void OnTriggerEnter2D(Collider2D other) {
 						<p>
 							After implementing this change, I realized that consistent attack patterns were key to having a fun enemy AI to fight against. 
 							Consistent movement allows for the player to anticipate attacks, anaylze them, and then react to them in a swift manner. 
-							The previous implementation made the Acrobat more irradicaly, and resulted in a negative player experience overall. 
+							The previous implementation made the Acrobat more erratically, and resulted in a negative player experience overall. 
 						</p>
 
 						<h2>Acrobat: Smoother Movement, and syncing state</h2>
 						
 						<p>
-                            In addition to making the Acrobat's movement more consistent, I working on making the Acrobat's movements smoother. 
+                            In addition to making the Acrobat's movement more consistent, I began working on making the Acrobat's movements smoother. 
                             Previously, the Acrobat would suddenly attack the player, charging at them at a high speed. 
                             This would give the player little time to react to the attack, and prevent them from counterattacking before the enemy decides to repose back to the ceiling. 
                             While looking up how to implement this online, I came across a nice formula that worked well: 
@@ -159,14 +159,13 @@ enemyScript.desiredVelocity = (location)  * speed * Time.fixedDeltaTime;
 
 						<p>
 							To set the enemy's velocity, I took the location I wanted the Acrobat to move in, and amplified it by a speed constant. 
-							What is ket to making the Acrobat's movement feel gradual is Time.fixedDeltaTime. 
+							What is key to making the Acrobat's movement feel gradual is Time.fixedDeltaTime. 
 							This variable gives an interval, in seconds, at which physics in the game are running. 
-							By multiplying the velocity by this variable, this allows for the velocity to be applied over time, as apposed to being done at an instant.
+							By multiplying the velocity by this variable, this allows for the velocity to be applied over time, as opposed to being done at an instant.
 						</p>
 
 						<p>
-							Moreover, I took the opportunity to find fixes to some difficult bugs I have noticed in the Acrobat 
-							since implementing its behavior. One of these issues is as follows: sometimes, while reposing, 
+							Moreover, I took the opportunity to fix difficult bugs noticeable in the Acrobat's behavior. One of these issues is as follows: sometimes, while reposing, 
 							the Acrobat would sometimes jolt in the direction of the player while completing its repose action. 
 							I was unable to exactly pinpoint what was causing this issue. 
 							However, I began to suspect that it was caused due to synchonization issues with the coroutines 
@@ -175,7 +174,7 @@ enemyScript.desiredVelocity = (location)  * speed * Time.fixedDeltaTime;
 						<img src="images/IO/MultiCoroutines.PNG" style="width:100%;height:auto;">
 						
 						<p>
-							Within the AI script, It used to be possible for multiple coroutines to run at the same time. 
+							Within the AI script, it used to be possible for multiple coroutines to run at the same time. 
 							If two coroutines are running, and both of them modify the same data, it is possible for one 
 							to overwrite the changes made by another coroutine before it can return. 
 							Due to this, the Acrobat would sometimes change its state before completing the previous one, 
@@ -216,9 +215,11 @@ enemyScript.desiredVelocity = (location)  * speed * Time.fixedDeltaTime;
 						</p>
 
 						<p>
-							I learned from this experience that I must reach out to my team members more so that I can learn from them and overcome roadblocks in implementing my tasks.
-							I must also continue studying video game development and practice designing and writing games in my own time; by doing this,
-							I will grow as a developer.
+                            I learned from this experience that knowing when to reach out to my team members is essential to getting my tasks done. 
+                            If I encounter a roadblock to implementing a feature, I must reach out for help soon enough. 
+                            By doing this, I will have enough time to act on my teammates' feedback and guarantee that I have the information necessary to complete my task by its deadline.
+                            I must also continue studying video game development and practice designing and writing games in my own time; by doing this,
+                            I will grow as a developer.
 						</p>
 
 						</div>
