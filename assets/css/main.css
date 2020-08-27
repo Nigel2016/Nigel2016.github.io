@@ -277,6 +277,12 @@ input, select, textarea {
 		position: relative;
 		top: 0.5em;
 	}
+	
+	.col-centered {
+		float: none;
+		margin-right: auto;
+		margin-left: auto;
+	}
 
 	sup {
 		font-size: 0.8em;
