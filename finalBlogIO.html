@@ -54,18 +54,12 @@
 						<div class="inner">
 							<h1>Io: Acrobat Script Iteration (April 12-20, 2020)</h1>
 							<span class="image main"><img src="images/pic13.jpg" alt="" /></span>
-							<p>The week of April 12th marked the Gold Sprint for project Io: our studios final deliverable for the game. 
-								During this sprint, I iterated upon my implementation of the Acrobat's AI script, fixing critical bugs and putting final touches on the creature's movement
+							<p>The week of April 12th marked the Gold Sprint for project Io: our studio's final deliverable for the game. During this sprint, I iterated upon my implementation of the Acrobat's AI script, fixing critical bugs and putting final touches on the creature's movement.
 							</p>
 							<h2>Acrobat Trigger issues (5 hours of development time)</h2>
-							<p>In the beta build of the game, it was descovered by one of the lead developers for the studio that the Acrobat enemies in the level would not move. 
-								When the player reached the Aggro range of the Acrobat, it would take no action:
+							<p>In the beta build of the game, it was discovered by one of the lead developers for the studio that the Acrobat enemies in the level would not move. When the player reached the Aggro range of the Acrobat, it would take no action:
 								<div style="width:100%;height:0;padding-bottom:57%;position:relative;"><iframe src="https://giphy.com/embed/M9lZJO8oNKibT4Y5mw" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/M9lZJO8oNKibT4Y5mw">via GIPHY</a></p>
-								This bug was very frustrating for me to hear about. In my local testing environment, the Acrobat appeared to be working fine. 
-								However, I realized that my setup was out of date with the official scene for the game. In order to resolve this issue, 
-								I did a critical review of my acrobat movement code, making sure that I did not accidently add a change that would prevent the enemy from moving. 
-								I placed several debug statements in my code which would print information regarding the internal state of the Acrobat. From the debug statements, 
-								I confirmed that the coroutines I set up to move the Acrobat were not activating. 
+								In my local testing environment, the Acrobat appeared to be working fine. However, I realized that my setup was out of date with the official scene for the game. To resolve this issue, I did a critical review of my acrobat movement code, making sure that I did not accidentally add a change that would prevent the enemy from moving. I placed several debug statements in my code which would print information regarding the internal state of the Acrobat. From the debug statements, I confirmed that the coroutines I set up to move the Acrobat were not activating. 
 								<img src="images/IO/AcrobatTriggeringIssues.PNG" style="width:100%;height:auto;">
 							</p>
 							<p>
