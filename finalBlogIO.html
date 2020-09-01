@@ -63,9 +63,7 @@
 								<img src="images/IO/AcrobatTriggeringIssues.PNG" style="width:100%;height:auto;">
 							</p>
 							<p>
-								While reviewing the Aggro object's settings, I noticed that there was a variable named "Raycast Line of Sight," which I paid no attention to while working on the Acrobat. 
-								It was either this setting, or the Raycast Layer Mask, was causing the Acrobat to not move. These variables belong to the EnemyAggro script, 
-								which contains logic for how the enemy uses its circle collider to detect players. Which looking over the code, I found a problematic section that could cause the issue: 
+								While reviewing the Aggro object's settings, I noticed that there was a variable named "Raycast Line of Sight." There was also a "Raycast Layer Mask" variable that was used to calculate which layers the enemy's raycast will detect. These variables belong to the EnemyAggro script, which contains logic for how the enemy detects players. Which looking over the code, I found a problematic section that could cause the issue: 
 <pre><code>
 private void OnTriggerEnter2D(Collider2D other) {
 	// Invoke OnAggro when the player enters the enemy's trigger or enter search mode
@@ -85,47 +83,43 @@ private void OnTriggerEnter2D(Collider2D other) {
 </code></pre>
 							</p>
 
-							<p>Due to several project deadlines that came up in my course schedule, I did not have time to completely study the enemyAggro code. 
-								However, it appeared that by having the raycastLineOfSight variable on, the script was unable to obtain a reference to the Acrobat's target (which is the player). 
+							<p>By having the raycastLineOfSight variable on, the script was unable to obtain a reference to the Acrobat's target (which is the player). 
 								After turning this variable off, the Acrobat's in the level began to move again:
 
 								<div style="width:100%;height:0;padding-bottom:57%;position:relative;"><iframe src="https://giphy.com/embed/j03uuJLlkwiD7BDH9E" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/j03uuJLlkwiD7BDH9E">via GIPHY</a></p>
 							</p>
 							<p>
-								It is likely that this setting was intended for an enemy which actively patrols for the player: the Stalker enemy, 
-								for instance, moves back and forth in a segment of the level until it finds a player to attack. The Acrobat, on the other hand, remains idle on the 
-								ceiling until a player enters its aggro range. I was relieved that this was the only issue causing the Acrobat to not move. However, much more work needed to be done. 
+								This setting was likely intended for an enemy that actively patrols for the player: the Stalker enemy, for instance, moves back and forth in a segment of the level until it finds a player to attack. The Acrobat remains idle on the ceiling until a player enters its aggro range. 
 							</p>
 						
 						<h2>Better Acrobat AI (25 hours of development time)</h2>
 
 						<p>
-						A few weeks ago, I changed the Acrobat's prefab collider into a trigger. This change was intended to improve the collisions that the enemy would have with the player.
-						If the object were a trigger, it would stop the player from moving the Acrobat and interrupting its movement patterns. However, while this seemed to work decently when I first implemented it, 
-						my change was later found to be buggy. The acrobats would frequently fly through the Crystal Cave's terrain, while attack the player from unexpected angles:
+							A few weeks ago, I changed the Acrobat's prefab collider into a trigger. This change was intended to improve the collisions that the enemy would have with the player. If the object were a trigger, it would stop the player from moving the Acrobat and interrupting its movement patterns. However, while this seemed to work decently when I first implemented it, 
+							my change was later found to be buggy. The acrobats would frequently fly through the Crystal Cave's terrain while attacking the player from unexpected angles:
 						<div style="width:100%;height:0;padding-bottom:57%;position:relative;"><iframe src="https://giphy.com/embed/l1Bn7XpAq0QVOtUUDH" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/l1Bn7XpAq0QVOtUUDH">via GIPHY</a></p>
 						</p>
 
 						<p>This bug made the Acrobat infuriating to fight during the Wolverinsoft Studio playtests. 
-							Moreover, I did not intend for this issue to occur: at the time that I tested the change, I was unable to reproduce this issue. 
-							For the remainder of the Studio's gold sprint, I spent a significant amount of time fixing this bug, and improving upon the movement patterns of the Acrobat.
-							I spent several hours attempting to get the trigger collider code to better detect Terrain. I tried using the Unity library's "IsTouching" function to prevent non-player objects 
-							from triggering the Acrobat collider. In addition, I put in tag comparisions in order to detect the type of object which triggered the Acrobat: 
-							upon hitting an object tagged as "Terrain" or "Hazard", I would set the acrobat's velocity to zero. 
-							However, these changes were not enough to consistently prevent the Acrobat's from penetrating the terrain. 
+                            Moreover, I did not intend for this issue to occur: at the time that I tested the change, I was unable to reproduce this issue. 
+                            For the remainder of the Studio's gold sprint, I spent a significant amount of time fixing this bug and improving upon the movement patterns of the Acrobat.
+                            I spent several hours attempting to get the trigger collider code to better detect Terrain. I tried using the Unity library's "IsTouching" function to prevent non-player objects from triggering the Acrobat collider. Also, I put in tag comparisons to detect the type of object which triggered the Acrobat: 
+                            upon hitting an object tagged as "Terrain" or "Hazard", I would set the acrobat's velocity to zero. 
+                            However, these changes were not enough to consistently prevent Acrobat from penetrating the terrain. 
 
-							With the final deadline looming, and after several failed attempts, I ended up reverting the Acrobat's trigger back into a collider. 
-							Having the Acrobat as a trigger turned out to be more problematic for physics with the environment, and was ultimately too difficult for me to get working within the 
-							project's time constraints. 
+                            With the final deadline looming, and after several failed attempts, I ended up reverting the Acrobat's trigger into a collider. 
+                            Having the Acrobat as a trigger turned out to be more problematic for physics with the environment, and was ultimately too difficult for me to get working within the 
+                            project's time constraints. 
+
 						</p>
 						<h2>Acrobat: Fixing Unpredictability</h2>
-						<p>Another piece of feedback that I recieved during the studio's playtest session was that the Acrobat's movement behaviors were too unpredictable. U
-							pon leaping to the player, the Acrobat would repose back to the ceiling, diagonally in the player's direction:
+						<p>Another piece of feedback that I received during the studio's playtest session was that the Acrobat's movement behaviors were too unpredictable. U
+                            pon leaping to the player, the Acrobat would repose back to the ceiling, diagonally in the player's direction:
 						</p>
 						<img src="images/IO/NearestCeiling.PNG" style="width:100%;height:auto;">
 						<p>While this made the enemy more challenging to fight, it ultimately proved to be more of an annoyance to players. 
 						   Without a way to determine where the Acrobat would move next, the player's became frustrated with the enemy, and 
-						   ended up skipping them all together.
+						   ended up skipping them altogether.
 						</p>
 						<div style="width:100%;height:0;padding-bottom:57%;position:relative;"><iframe src="https://giphy.com/embed/hogR4W4fEl2iN951pq" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/hogR4W4fEl2iN951pq">via GIPHY</a></p>
 						
@@ -198,14 +192,13 @@ enemyScript.desiredVelocity = (location)  * speed * Time.fixedDeltaTime;
 						<h2>Postmortem</h2>
 						
 						<p>
-							Overall, working in Wolverinsoft Studio was an amazing experience. 
-							I got to collaborate with students across multiple disciplines and was able to contribute to a game from start to finish. 
-							It was challenging at times: in many cases, I was stuck for multiple hours at a time trying to 
-							implement a feature. Although I had a clear understanding of the aspect of the Acrobat, coming up with the code to implement the Acrobat was challenging at times, and I was often stuck for several hours at a time attempting to figure out how to program a certain feature. 
+                            Overall, working in Wolverinsoft Studio was an amazing experience. 
+                            I got to collaborate with students across different disciplines and was able to contribute to a game from start to finish. 
+                            It was challenging at times: in many cases, I was stuck for multiple hours at a time trying to implement a feature. Although I had a clear understanding of the aspect of the Acrobat, coming up with the code to implement the Acrobat was challenging at times, and I was often stuck for several hours at a time attempting to figure out how to program a certain feature. 
 						</p>
 
 						<p>
-							However, I believe that this is partially due to my inexperience; I have only been doing game programming for about a year now. 
+							However, I believe that this is partially due to my inexperience; I have only been doing game programming for a few months now. 
 							Moreover, I could have been more proactive about reaching out to other members in my pod to receive help on my tasks.
 						</p>
 
