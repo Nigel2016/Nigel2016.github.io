@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Nigel's Game Dev Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="../index.html" class="logo">
+									<span class="symbol"><img src="../images/game-development.svg" alt="" /></span><span class="title">Nigel's Game Development Portfolio</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+						</div>
+					</header>
+
+				<!-- Menu -->
+				<nav id="menu">
+					<h2>Menu</h2>
+					<ul>
+						<li><a href="../index.html">Projects</a></li>
+						<li><a href="../aboutMe.html">About Me</a></li>
+                        <li><a href="../files/Nigel_Charleston_Resume_New.pdf">Resume</a></li>
+                        <li><a href="../desolationPlace.html">Desolation Place</a></li>
+						<li><a href="../io.html">IO</a></li>
+						<li><a href="../magicHat.html">The Magic Hat</a></li>
+						<!-- <li><a href="../zelda.html">Zelda</a></li> -->
+					</ul>
+                </nav>
+
+                <div id="main">
+                    <div class="inner">
+                        <h1> Interviewing Stakeholder and Determining Direction for Project (9/29/2020)</h1>
+                        <span class="image main"><img src="../images/ProceduralGeneration/Dragon_trees.jpg" alt="" /></span>
+                        <p> For this week, I interviewed one of my stakeholders, and reached out to several others. Based on what we discussed, 
+                            I spent the rest of my time reviewing resources sent to me, and coming up with a rough direction for my project.
+                        </p>
+                        <h2>Interview with Apoorva (1 hour)</h2>
+                        <p>
+                            I was able to get an interview with Apoorva, a software engineer from Sucker Punch Games. He had experience developing
+                            procedural generation tools for Ghost of Tsushima, which proved to be invaluable for completing the open world. Below
+                            is a summary of what we discussed:
+                        </p>
+
+                        <h3>Why use procedural generation?</h3>
+                        <p>
+                            Procedural generation is useful for when you don't have enough people to create the content you are envisioning.
+                            Ghost of Tsushima's world is 20x bigger than anything the studio has done in its history:
+                            <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/vQa4fPUvhVM' frameborder='0' allowfullscreen></iframe></div>
+                            Although the team has well over 100 developers, creating that entire map by hand would take too much time. Apoorva mentioned that
+                            seeding the island alone would take roughly 5+ years (which is exactly how long it took them to complete the game). 
+                            
+                            To mitgate this, they needed a system of level design tools which allow them to: 
+                            <ul>
+                                <li>Build at a fast and scalable level</li>
+                                <li>Have great flexibility and allow for iteration</li>
+                                <li>Create and balance the distribution of content on the island (vegetation, rocks, rivers)</li>
+                                <li>Allow for the management of in-game economy: bamboo, iron, resources, etc.</li>
+                            </ul>
+
+                            Moreover, these tools need to impower the level-designers, rather than replace them.
+                            <div style="position:relative; padding-bottom:calc(56.25% + 44px)"><iframe src="https://gfycat.com/ifr/parchednecessarygardensnake" scrolling="no" style="position:absolute;top:0;left:0;" allowfullscreen="" width="100%" height="100%" frameborder="0"></iframe></div>
+                        </p>
+
+                        <h3>Biggest Challenges</h3>
+                        <p>
+                            One of the biggest challenges that the team had was that they were solving a problem that they didn't know the solution to. 
+                            You could take inspiration from other studios, such as Guerrilla Games, or view previous GDC talks:
+                            <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/_ooDLiU-o6c' frameborder='0' allowfullscreen></iframe></div>
+
+                            While these help at a high-level, Sucker Punch studio has its own in-house engine. The tools for Ghost of Tsushima needed to 
+                            solve the problem of automating the creation of the world, but also be mindful of the engines capabilities and the vision for the game.
+                            Furthermore, you have to be aware of how much procedural generation to do. While it is useful, it has to generate content in a way that
+                            is manageble and support interaction with the different gameplay and environmental systems present. 
+                        </p>
+                        <h3>Saving Changes</h3>
+                        <p>Another question I asked Apoorva was in regards to how the studio saved procedural changes. If the tools generate content the designers like,
+                           what archetiture is necessary to ensure those changes are not overwritten by other level designers? Here were some ways this was resolved:
+        
+                           <ul>
+                               <li>
+                                Make the editing experience real time. When someone is using a tool, they work on a specfic subsection of the map. As the user adds and
+                                removes content, they can see the immediate impact of their work. This allows designers to visualize their changes and prevent making
+                                game-break alterations to the map.
+                                </li>
+                                <li>
+                                Cache any content necessary for the missions (NPCs, pathfinding, enemy placements) in memory so that is cannot be modified. If you need
+                                something specific for the player to interact with (for instance, Jin leaning on a tree after completing a mission), hardcode it into the
+                                environment instead of relying on the procedural generation tools to create it.
+                                </li>
+
+                                <li>
+                                    Foster communication across the entire team. The designers should always be aware of what each other is doing so that changes can be assessed
+                                    and no game-breaking alterations are made.
+                                </li>
+                           </ul>
+                        </p>
+                        <h3>Research Feedback</h3>
+                        <p>
+                            For my project, my initial idea was to create a tool which will automatically create 3D levels, based on seeding informatioon provided by the designer. 
+                            They would be able to inspect the level to see if they like it, and download it in a variety of file formats. While this idea seems promising, it may be difficult to finish
+                            by the end of the semester. To help refine my idea, Apoorva gave the following feedback:
+
+                            <ol>
+                                <li>Think about concrete(s) problems to solve in level design. 
+                                    How can I make the tool so that is can address specific issues, and be useful to someone?</li>
+                                <li>Be mindful of my audience: for academia, having a broad issue is generally fine. However, for game industry,
+                                    developers need specific tools to resolve specific problems. 
+                                </li>
+                            </ol>
+
+                            A good approach for a research project like this is to have a general idea, but then apply it to address 3 specific instances of a problem.
+                            This is the general approach the Sucker Punch takes whenever they implement features. In addition, I need to look into more examples of 
+                            industry applying procedural ggeneration to solve problems.
+                        </p>
+                        <h2>Research industry usages of Procedural Generation (4.5 hours)</h2>
+                        <p>After getting Apoorva's feedback I spent a majority of time looking into industry specific usages of procedural generation. Both he and another
+                            stakeholder sent me an abundance of useful resources, which will be summaries below. 
+                        </p>
+                        <h3><a href="https://www.ghostship.dk/blog/procedural-level-generation">Deep Rock Galactic-Procedural Level Generation</a></h3>
+                        <p>Deep Rock Galactic is 4 person FPS co-op game, where you explore procedurallly generated caves with your friends and mine for resources.
+                            One of the biggest goals of the developers (Ghost Ship) was to create a sense of exploration: everytime you play
+                            the game, you discover something brand new and unexpected:
+                            <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/cDcoMdHYdQg' frameborder='0' allowfullscreen></iframe></div>
+                            The developers chose to make cave generation system. They first hand crafted several
+                            cave templates, each of varying size. Then, these levels are chosen at random, and connected with varying
+                            size tunnels. Then, enemy placements, crystals, gold, and the entrance and exit are randomly placed. While
+                            the developer notes that more work needs to be done, the system works very well for them. 
+                        </p>
+                        <h3>Procedural Generation for Everyone-Kate Compton</h3>
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/WumyfLEa6bU' frameborder='0' allowfullscreen></iframe></div>
+                        <p>
+                            This video gives a great walkthrough of different procedural generation techniques. It also gives an overview of different usecases
+                            of procedural generation, and how to effectively use it to build content quickly. Here are some usages:
+                            <ul>
+                                <li>Minecraft: automatically generates terrain in its world.</li>
+                                <li>No Man Sky: procedural planet and universe creation. Diverse biomes.</li>
+                                <li>Dwarf Fortress: world building and the historic background of the player is randomized.</li>
+                                <li>Pip and Bars: provides you with different ways to stroke your beard as you think of chess moves.</li>
+                            </ul> 
+                            When you create proc gen content, you also need mechanisms for saving content you want, and remove content that is undesirable.
+                            There are multiple ways to do this:
+                            <ul>
+                                <li>Save Seeds: Make a note of great content, and save their generation seeds (ex. perlin noise settings)</li>
+                                <li>Algorithms: Write algorithms to judge the viability of the content. However, use a rank-based system to prevent good results from being discarded.</li>
+                                <li>Constraint Solving: Enumerate the entire search space, and brute force for the best results. This is computationally intense, but valuable if implemented well.</li>
+                            </ul>
+                        </p>
+                        <h3>Wildlands: Procedural Tools</h3>
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/kzthHcbG9IM' frameborder='0' allowfullscreen></iframe></div>
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/bQ_U1_MVKJQ' frameborder='0' allowfullscreen></iframe></div>
+                        <p>
+                            Benoit Martinez sent me links to various talks he has given regarding the usage of procedural tools in developing <i>Ghost Recon: Wildlands</i> 
+                            Wildlands is one of the largest open world games ever produced at Ubisoft. Here were some interesting features of the game's world:
+                            <ul>
+                                <li>11 Biomes and over 140 materials used to paint the environment.</li>
+                                <li>Over 656.421 km long roads and Footpaths 2150.24 km in size.</li>
+                                <li>Well over 58 villages, with 234,697 village props.</li>
+                            </ul>
+                            Building such a world by hand would surely be intensive and take years. To automate the building of such a world, Ubisoft created over 145 tools as well as
+                            a fully automated pipeline to get procedural content into the game as smoothly as possible. The tools developed covered terrain generation, GPU sculpting
+                            for efficient operating on map chunkcs, and path finding for connecting roads. Each of the tools are rule based, deterministic, and runs primarly
+                            offline on CPU computations.
+                        </p>
+
+                        <h2>Next Steps (.5 hours)</h2>
+                        <p>
+                            After viewing these resources, I have a better idea for structuring my project. My work, going forward, will investigate ways we can use procedural generation
+                            to automate specific stages in the level design process. I found a nice article written by game designer Fredrik Henriksson that summaries the work necessary 
+                            to build levels from concept to implementation:
+
+                            <ul>
+                                <li>Planning: based on preexisting game assets, as well as reference material, decide
+                                    on the type of map you want to create, and determine the atmosphere and mood of the level.
+                                    After this, plan out the gameplay areas and the winning conditions.
+                                </li>
+                                <li>
+                                    Protoyping and Blockout level: Use the level editor/game engine to build out basic features of the
+                                    map. use primitive shapes to resemble rooms, doors, and important icons in the map.
+                                </li>
+                                <li>
+                                    Testing: play the blockout levels, making sure that the player can walk and jump aroudn without
+                                    getting stuck. Solicit feedback from playtesters regarding the level, and use bug tracking tools
+                                    to take note of serious issues. 
+                                </li>
+                                <li>
+                                    Item and Spawn placements: Determine optimal placements for pickups and weapons to encourage
+                                    gameplay and risk and award. 
+                                </li>
+                                <li>
+                                    Decoration, Event triggers, and pathfinding: turn the blocks into a good looking level and add details.
+                                    Add in event triggers and iterate upon feedback
+                                </li>
+                            </ul>
+
+                            My project, going forward, will explore how procedural generation can be employed to automate some/or all of these stages. 
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Scripts -->
+                <script src="../assets/js/jquery.min.js"></script>
+                <script src="../assets/js/browser.min.js"></script>
+                <script src="../assets/js/breakpoints.min.js"></script>
+                <script src="../assets/js/util.js"></script>
+                <script src="../assets/js/main.js"></script>
+        </body>
+    </html>
