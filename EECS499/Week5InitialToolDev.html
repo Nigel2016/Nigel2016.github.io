@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Nigel's Game Dev Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="../index.html" class="logo">
+									<span class="symbol"><img src="../images/game-development.svg" alt="" /></span><span class="title">Nigel's Game Development Portfolio</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+						</div>
+					</header>
+
+				<!-- Menu -->
+				<nav id="menu">
+					<h2>Menu</h2>
+					<ul>
+						<li><a href="../index.html">Projects</a></li>
+						<li><a href="../aboutMe.html">About Me</a></li>
+                        <li><a href="../files/Nigel_Charleston_Resume_New.pdf">Resume</a></li>
+                        <li><a href="../desolationPlace.html">Desolation Place</a></li>
+						<li><a href="../io.html">IO</a></li>
+						<li><a href="../magicHat.html">The Magic Hat</a></li>
+						<!-- <li><a href="zelda.html">Zelda</a></li> -->
+					</ul>
+                </nav>
+
+                <div id="main">
+                    <div class="inner">
+                        <h1>Market Research (9/15/2020) </h1>
+                        <span class="image main"><img src="../images/ProceduralGeneration/Dragon_trees.jpg" alt="" /></span>
+                        <p> For this week, I began implementing a tool that could generate procedurally generated maps. These maps
+                            will not be complete levels, but instead a base for which a level designer can take and blockout.
+                            
+                            Access webbuild here: link
+						</p>
+                        <h2>Email followup with Benoit Martinez (1 hour)</h2>
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/bQ_U1_MVKJQ' frameborder='0' allowfullscreen></iframe></div>
+						<p>
+                            Benoit Martinez, a technical artist for Ubisoft, replied back to me with several resources regarding
+                            the procedural tools used to build Ghost Recon: Wildlands (discussed in previous week post). I sent him a reply
+                            with a few questions regarding his experience:
+
+                            <ol>
+                                <li>For Ghost Recon Wildlands, roughly how many developers did your tools support?</li>
+                                <li>During Ghost Recon Wildlands' development, how did your team make sure that the changes made by the procedural tools did not overwrite parts of the level that needed to be saved and left unmodified?</li>
+                                <li>In the GDC vault video you sent me (around 53:37 mark), you mentioned that over 145 procedural tools were developed for Wildlands. Was there any consideration for creating these tools in a way that they could be reused in future Ubisoft projects?</li>
+                            </ol>
+
+                            Below were his responses: 
+                            <ol>
+                                <li>There was 1 graphics engineer, 4 technical artists who worked on the Houdini-Engine tools mentioned in the above video, and 1 tools engineer who integraded Houdini into the teams in-house level editor.</li>
+                                <li>The developers utilized exclusion zones, which generate as much content as possible (terrain, rivers, roads, etc.). Once this was done, the level designers who were in charge
+                                    with specific locations can decide to include and exclude layers of the environment they are working on.
+                                </li>
+                                <li>The team originally wanted to have tools reusable across projects; however, projects tend to have very specific needs, so that was not always possible.
+                                    It takes a significant amout of time to create agnostic tools; so ultimately, most must be made with a specific context and engine in mind. 
+                                    However, the underlying pipeline can some tools can be carried over into other projects, depending on if those projects have similar constraints and
+                                    similar engine. 
+                                </li>
+                            </ol>
+                        </p>
+                        <h2>Beginning Tool Development (5 hours)</h2>
+                        <p>
+                            In the previous blog post, I mentioned how I wanted to narrow my project to tackle specific problems within level design. For the next few
+                            weeks, I will be tackling the initial stages of a levels development. For the following 2 weeks or so, I want to explore how procedural generation can be used 
+                            to help protyping and blocking out levels.
+
+                            For this week specifically, I began to implement a unity webbuild which will let users generate a plane mesh with perlin noise, and download the mesh as a FBX file.
+                            My idea is that this plane can be used as a starting point for blocking out a level. It is ment to be a rough start, something that a designer can take and 
+                            develop further.
+                            <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/moveTerrain.mp4' frameborder='0' allowfullscreen></iframe></div>                                    
+                            I started by making a panel that will coontain basic options for manipluating the plane, then worked on a way to get the mesh to be present in front of the panel.
+                            I wasn't able to find a responsive way to do it (ideally, we will calculate the center of the panel, and have the mesh appear there), but the way it is set up now is find.
+
+                            For the next step, I tried to find a way that we can move the layer around using the mouse. The code for doing this is simple with Unity's "Mouse functions". However,
+                            I ran into a strange issue attaching the code to the mesh object. When the mesh is built at runtime, the mouse code refused to work. I was able to determine that the mesh needed
+                            a "box collider" to be movable; but even when I added this component in my project code, the mesh still did not move:
+                            
+                            <img src="../images/ProceduralGeneration/meshCreate.PNG" alt="Code for creating a mesh" style="width:100%;height:auto;">
+                            
+                            What I ended up doing was just having a default plane on top of the canvas, and let the user modify it from there. I also spent a time figuring out how you can rescale a mesh using the mouse;
+                            however, I was not able to find a way due to time constraints. I will be taking a look at the mouse API to see if if has anything promising. 
+                            
+                            The reset button will instead be used to reset the position of the mesh and the perlin noise settings:
+                            <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/perlin_noise.mp4' frameborder='0' allowfullscreen></iframe></div>                                    
+
+                            I discuss the perlin noise generation in more detail in my prototype post. However, he is a summary of what each slider does:
+                            <ul>
+                                <li>X offset, Y offset: Moves the noise on the x axis and y axis. This results in some very interesting patterns.</li>
+                                <li>Octaves: gives variation to the noise's curves. Each curve has an amplitude (y-axis) and a frequency (x-axis)</li>
+                                <li>Seed: allows us to further randomize the underlying perlin patterns using numbers generated from the range of -10000 to 10000.</li>
+                                <li>Noise Level: The deepness of the noise curves: scale downwards to make curves smaller, scale upwards to make curves bigger.</li>
+                                <li>Lacunarity: increased the frequency of the octaves.</li>
+                            </ul>
+                            I unfortunately was not able to to get the mesh download feature in this week. However, I have a good idea of some APIs that are avaliable for doing this; so this will come in next weeks 
+                            build. Going forward, there will be a web build for every week to allow users to sample the project's progress. 
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Scripts -->
+                <script src="assets/js/jquery.min.js"></script>
+                <script src="assets/js/browser.min.js"></script>
+                <script src="assets/js/breakpoints.min.js"></script>
+                <script src="assets/js/util.js"></script>
+                <script src="assets/js/main.js"></script>
+    
+        </body>
+    </html>
