@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Nigel's Game Dev Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="../index.html" class="logo">
+									<span class="symbol"><img src="../images/game-development.svg" alt="" /></span><span class="title">Nigel's Game Development Portfolio</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+						</div>
+					</header>
+
+				<!-- Menu -->
+				<nav id="menu">
+					<h2>Menu</h2>
+					<ul>
+						<li><a href="../index.html">Projects</a></li>
+						<li><a href="../aboutMe.html">About Me</a></li>
+                        <li><a href="../files/Nigel_Charleston_Resume_New.pdf">Resume</a></li>
+                        <li><a href="../desolationPlace.html">Desolation Place</a></li>
+						<li><a href="../io.html">IO</a></li>
+						<li><a href="../magicHat.html">The Magic Hat</a></li>
+						<!-- <li><a href="zelda.html">Zelda</a></li> -->
+					</ul>
+                </nav>
+
+                <div id="main">
+                    <div class="inner">
+                        <h1>Color and Map Preview (10/13/2020)</h1>
+                        <span class="image main"><img src="../images/ProceduralGeneration/Dragon_trees.jpg" alt="" /></span>
+                        <p> For this week, I add color to the perlin noise map; giving it more variation and customization. I also implemented
+                            a way to generate color maps at random, and give users the ability to preview their maps. 
+                            
+                            Access webbuild here: <a href="../files/web_builds/Week6/index.html">link</a>
+						</p>
+
+                        <h2>Tool Development (5 hours)</h2>
+                        <p>
+                            Significant time was used to development color for the noise map. To do this, we use an array of terrain tiles which can store different colors.
+                            
+                            <img src="../images/ProceduralGeneration/terrain_struct.PNG" alt="Makeing random terrain." style="width:33%;height:auto;">
+                            
+                            <p>
+                            With an array of these structs, we can modify the perlin noise generator to write in colors for each of our tiles. For each tile, we also have a
+                            height ranging from 0.0f to 1.0f. This will be used next week to give each tile appearance in 3D. For now, the map is currently in 2D: 
+                            </p>
+                            <img src="../images/ProceduralGeneration/map_color_implementation.PNG" alt="Making random terrain." style="width:100%;height:auto;">
+
+                            After getting the terrain successfully rendered on the plane, I then extended upon my tool UI to make it possible for a user to make color maps.
+                            It took me a while to think of a good way to do this. Ideally, I would want something similar to the Unity editor, where you can swap out the color with a
+                            RBG color picker. I would like for the user to have as much agency as possible with customising the tiles.
+                            
+                            <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/color_map_buttons.mp4' frameborder='0' allowfullscreen></iframe></div>                                    
+
+                            However, for the sake of time, I had to implement for users to generate the terrain at random. with the array I created earlier, I make randomized
+                            tiles for each entry in the terrain array: the user can select up to 2 to 10 terrain tiles. Each tile will have a name, randomized height between 0.01f-1.0f, and
+                            a color with random red, green and blue values:
+
+                            <img src="../images/ProceduralGeneration/make_random_terrain.PNG" alt="Making random terrain." style="width:100%;height:auto;">
+
+                            Since the values are completely random, the generate color map button can have a wide variety of results. However, it seems to work well for now:
+
+                            <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/generate_random_color_maps.mp4' frameborder='0' allowfullscreen></iframe></div>                                    
+
+                            I also fixed issues with the perlin noise map not showing anything when the tool starts up. I noticed in my unity editor that the public values of the options were
+                            effecting the map when it was launched. To fix this, I reset the map's settings so that they are the minimum:
+
+                            <img src="../images/ProceduralGeneration/reset_plane_settings.PNG" alt="Reset plane settings." style="width:100%;height:auto;">
+
+                            Another significant feature I implemented is the ability to preview the map. Using a new option, the user can now switch perspectives to the map level, and explore the 
+                            terrain. Due to it being 2D, there is not much to explore. However, having the implementation done now will make development much easier going forward. 
+
+                            <img src="../images/ProceduralGeneration/switch_perspective_code.PNG" alt="Switch perspectives" style="width:100%;height:auto;">
+                            Implementation consists
+                            of a player controller and the following code to switch from tool to player camera, and from player camera back to the tool interface: 
+
+                            <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/preview_map.mp4' frameborder='0' allowfullscreen></iframe></div>                                    
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Scripts -->
+                <script src="assets/js/jquery.min.js"></script>
+                <script src="assets/js/browser.min.js"></script>
+                <script src="assets/js/breakpoints.min.js"></script>
+                <script src="assets/js/util.js"></script>
+                <script src="assets/js/main.js"></script>
+    
+        </body>
+    </html>
