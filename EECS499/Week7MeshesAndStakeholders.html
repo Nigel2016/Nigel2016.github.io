@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Nigel's Game Dev Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="../index.html" class="logo">
+									<span class="symbol"><img src="../images/game-development.svg" alt="" /></span><span class="title">Nigel's Game Development Portfolio</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+						</div>
+					</header>
+
+				<!-- Menu -->
+				<nav id="menu">
+					<h2>Menu</h2>
+					<ul>
+						<li><a href="../index.html">Projects</a></li>
+						<li><a href="../aboutMe.html">About Me</a></li>
+                        <li><a href="../files/Nigel_Charleston_Resume_New.pdf">Resume</a></li>
+                        <li><a href="../desolationPlace.html">Desolation Place</a></li>
+						<li><a href="../io.html">IO</a></li>
+						<li><a href="../magicHat.html">The Magic Hat</a></li>
+						<!-- <li><a href="zelda.html">Zelda</a></li> -->
+					</ul>
+                </nav>
+
+                <div id="main">
+                    <div class="inner">
+                        <h1>Color and Map Preview (10/21/2020)</h1>
+                        <span class="image main"><img src="../images/ProceduralGeneration/Dragon_trees.jpg" alt="" /></span>
+                        <p> For this week, I added meshes to the map and made things begin to look 3D. I also was able to get in touch
+                            with 2 more stakeholders for my project. 
+                            
+                            Access webbuild here: <a href="../files/web_builds/Week7/index.html">link</a>
+						</p>
+                        <h2>Stakeholders (2 hours)</h2>
+                        <p>I spent time followup with each of my stakeholders to ask about their research and as well as ideas with regards to my project:</p>
+                        
+                        <h3>Dr. Mike Cook</h3>
+                        
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/sz0hn3FXTwc' frameborder='0' allowfullscreen></iframe></div>
+                        
+                        <p>Mike Cook is a research fellow at Queen Mary University of London. Here were some questions I asked him:
+
+                        <ol>
+                            <li>I am fascinated by <a href="https://www.semanticscholar.org/paper/Automating-Game-Design-In-Three-Dimensions-Cook-Colton/e6856ccff033677b966993ec24096632769e290f">ANGELINA-5's</a> ability to produce 3D games automatically. Is there a specific genre (example: role-playing, action-adventure) that it works best with? Or is it intended to develop games of any genre imaginable? </li>
+                            <li>What sorts of algorithms or techniques are used in the ANGELINA framework to guarantee that the games it generates are playable from beginning to end? </li>
+                        </ol>
+
+                        Below were his responses: 
+
+                        <ol>
+                            <li>Each version of ANGELINA is tailor-made for a specific genre; with an exception of the latest iteration ANGELINA 5 which he aims to make more general.
+                                Automated Game Design works best with genres where the design is contained within a few small decisions. Hence, it does not work well with complex genres
+                                like JRPGs, which require many small ideas to work well (spells, weapon mechanics, gameplay systems). A puzzle game, for instance, is much easier to automate
+                                since it only requres a few simple rules, and allows for a multiude of ways those rules can be exploited.
+                            </li>
+                            <li>Each version of ANGELINA tended to use algorithms/technicles exclusive to it (custom made). ANGELINA-3, for instance, required a hand written algorithm 
+                                to verify a player could reach the end of a platformer level. However, AI players tend to be used to see fi the games generated can be completed.
+                                In particular, MCTS agents are quite useful. 
+                            </li>
+                        </ol>
+
+                        </p>
+                        <h3>Amit Patel (Red Blob Games)</h3>
+
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://www.youtube.com/embed/K10Ls4NHbz4' frameborder='0' allowfullscreen></iframe></div>
+
+                        <p>Amit is a software developer living in the Silicon Vally area, and is passionate about computer game development. His blog at <a href="https://www.redblobgames.com/">https://www.redblobgames.com/</a>
+                           discusses procedural generation and AI algorithms (pathfinding+traversal); each article provided with numerous visual examples. Here are some questions I asked him:
+                        
+                        <ol>
+                            <li>How did you get started with building procedural generation tools? Which one in your career do you feel most proud of? </li>
+                            <li>Where do you think procedural generation will be going in the future? Have there been any recent developments or applications of this field that you are excited about? </li>
+                        </ol>
+                        
+                        Below were his responses:
+                        <ol>
+                            <li>"I started with procedural generation tools because I was working on a simulation project where the world evolved over time, shaped by the player actions. I decided that the same simulation process that was used while the game was running could also be used to generate the initial world. I now think that was a mistake, but that's another topic ;-) . The tool I'm most proud of is <a href="https://www.redblobgames.com/maps/mapgen4/">mapgen4</a>. I designed algorithms that ran very fast so that you could draw on the map and the entire world generator (including evaporation, rainfall, wind, and river flow) could run in 1/30th of a second, so you could see the results in real time. This took ~5 months of research and experimentation, ~3 months of implementation, and ~3 months of code optimization. I had designed it for a specific game, but that game was canceled, so I released the tool as open source."</li>
+                            <li>"I think there is a lot of excitement around procedural generation but I do not expect that it will be used much more than it is now. I think people get excited about specific solutions and then overuse them. Instead, focus on the problems and then evaluate possible solutions. For example if I came to you and said "hash tables are exciting! let's use them in our game!" it would seem weird. Instead you'd want to develop a game by focusing on the problems like "the player needs to choose skills from a skill tree", and then you evaluate the possible solutions: array or hash table or tree or graph. Then you pick the best solution to that problem. I think we should consider procedural generation as one of many possible approaches to a problem, not necessarily the best one. If there's a procedural generation topic I'd like to see explored more, it's constraint solvers. WaveFunctionCollapse is one specific constraint solver that has gotten some attention but there are so many more that should be looked at."</li>
+                        </ol>
+
+                        </p>
+                        <h2>Tool Development (4 hours)</h2>
+                        <p>
+                            For the remaining time, I started working on mesh generation foor the map. Given the color map, we can draw out a mesh which replacates its appearances:
+                            <img src="../images/ProceduralGeneration/mesh_visibility.PNG" alt="Reset plane settings." style="width:100%;height:auto;">
+                            
+                            Meshes are a data structure which contains triangles formed together. In unity, they have their own material and Renderer. In the next screenshot, you can see the indivdual triangles that make up the map when its drawn as a mesh:
+                            <img src="../images/ProceduralGeneration/triangles_son.png" alt="Reset plane settings." style="width:100%;height:auto;">
+
+                            I had to extend my UI to support select mesh generation as an option. No matter what random colors we have, the corresponding mesh will be generated:
+                            <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/mesh_generation.mp4' frameborder='0' allowfullscreen></iframe></div>                                    
+                            <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/mesh_material_changes.mp4' frameborder='0' allowfullscreen></iframe></div>   
+                            
+                            I ran into a few issues while adding mesh support. For one, I assumed that the player would spawn onto the color map (last week). We also have to deal with two maps at once (a color map, and a mesh map). To handle this correctly, I modified my code
+                            so that only one map would be active at once. I also had to reposition the mesh so that its settings and size are identical to the color plane.
+                            <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/explore_mesh.mp4' frameborder='0' allowfullscreen></iframe></div>
+                            
+                            After handling the mesh generation, I worked on getting the mesh to pop out in 3D. To do this, I take the y value of each mesh verticy and multiply it by a multiplier. This option can now be adjusted in the editor:
+                            <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/explore_mesh_3D.mp4' frameborder='0' allowfullscreen></iframe></div>                                    
+
+                            For next time, I will look into how I can enhance the tool using Amit and Dr. Cook's feedback. I also want to work on getting the UI to be more responsive. Currently, I have manually placed
+                            the modified plane within view of the camera and UI. I would like to look into ways that I can make the UI look cleaner and less prone to manual adjustment. 
+                            <img src="../images/ProceduralGeneration/UI_consideration.png" alt="Reset plane settings." style="width:100%;height:auto;">
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Scripts -->
+                <script src="assets/js/jquery.min.js"></script>
+                <script src="assets/js/browser.min.js"></script>
+                <script src="assets/js/breakpoints.min.js"></script>
+                <script src="assets/js/util.js"></script>
+                <script src="assets/js/main.js"></script>
+    
+        </body>
+    </html>
