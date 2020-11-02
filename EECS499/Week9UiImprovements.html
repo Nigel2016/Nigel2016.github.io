@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Nigel's Game Dev Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="../index.html" class="logo">
+									<span class="symbol"><img src="../images/game-development.svg" alt="" /></span><span class="title">Nigel's Game Development Portfolio</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+						</div>
+					</header>
+
+				<!-- Menu -->
+				<nav id="menu">
+					<h2>Menu</h2>
+					<ul>
+						<li><a href="../index.html">Projects</a></li>
+						<li><a href="../aboutMe.html">About Me</a></li>
+                        <li><a href="../files/Nigel_Charleston_Resume_New.pdf">Resume</a></li>
+                        <li><a href="../desolationPlace.html">Desolation Place</a></li>
+						<li><a href="../io.html">IO</a></li>
+						<li><a href="../magicHat.html">The Magic Hat</a></li>
+						<!-- <li><a href="zelda.html">Zelda</a></li> -->
+					</ul>
+                </nav>
+
+                <div id="main">
+                    <div class="inner">
+                        <h1>Color and Map Preview (10/21/2020)</h1>
+                        <span class="image main"><img src="../images/ProceduralGeneration/Dragon_trees.jpg" alt="" /></span>
+                        <p> For this week, I worked on improvements to the UI: both code organization and layout of components on the tool. 
+                            
+                            Access webbuild here: <a href="../files/web_builds/Week9/index.html">link</a>
+						</p>
+						<h2>UI Improvements (6 hours)</h2>
+                        <p>During this sprint, I watched several videos on user interface development. One of the first steps I took to improve the current UI was by moving any code specific to its operation to be in its own class/script. By using this script, UIComponents.cs, I can keep my
+                        main file for generating meshs clean, and group functions together by purpose. 
+                        </p>
+                        <img src="../images/ProceduralGeneration/Week9/slider_code.PNG" alt="Code Snippet" style="width:50%;height:auto;">
+                        <p>It took a few hours of debugging to resolve issues tied to this change. Some variables are ncessary in my main class in order to generate the maps; to allow 
+                            my UIComponent script to access these variables, I use the "protected" keyword on those variables, and make the UIController a child class. I also had to reassign
+                            the script to the Canvas to prevent duplicate references in the unity editor. The variables used to be public, but now, will be private to the UI class.
+                        </p>
+                        <img src="../images/ProceduralGeneration/Week9/do_these_need_to_be_here.PNG" alt="color pick prefab" style="width:50%;height:auto;">
+                        <p>Furthermore, I cleaned up the UI so that functions specific to a particular mode only show up when that mode is selected.</p>
+                        <img src="../images/ProceduralGeneration/Week9/switch_mode_improvements.PNG" alt="Switch mode snippet" style="width:50%;height:auto;">
+                        <p>I hope that this change allows for the tool to be more straightforward to use. I also got rid of the button for generating meshes; now, if you switch into mesh mode, you will
+                        the mesh will automatically be generated based on the existing color map. 
+                        </p>
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week9/turn_ui_off.mp4' frameborder='0' allowfullscreen></iframe></div>
+
+                        <p>My next step was to implement a way that the user can add multiple custom terrain to their map. Currently, you can only have 2 custom terrains. I hoped to find an easy way for the user
+                        to add much more. To do this, I leaveraged Unity's "scroll rect" script: 
+                        </p>
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week9/scroll_rect.mp4' frameborder='0' allowfullscreen></iframe></div>
+                        <p>The scroll rect allows for multiple ui components to be accessed via a scrolling mechanism, while keeping the canvas from being cluttered. This part took alot of trial and error to get right:</p>
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week9/scroll_rect_improvement.mp4' frameborder='0' allowfullscreen></iframe></div> 
+                        <p>Eventually, I was able to get the custom objects working within the scroll rect area. After adjusting the position of the scroll view, I added a bar that can be click to examine the custom terrain selectors.</p>
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week9/scroll_rect_et_al.mp4' frameborder='0' allowfullscreen></iframe></div>
+                        <p>Now that the scroll rect is immplemented, I can add the ability for multiple custom terrain to be selected. I can also start implementing additional features for the tool: one of which is the ability to procedurally place objects onto
+                        the map. This will be coming up next week. 
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Scripts -->
+                <script src="assets/js/jquery.min.js"></script>
+                <script src="assets/js/browser.min.js"></script>
+                <script src="assets/js/breakpoints.min.js"></script>
+                <script src="assets/js/util.js"></script>
+                <script src="assets/js/main.js"></script>
+    
+        </body>
+    </html>
