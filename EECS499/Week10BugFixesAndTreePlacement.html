@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Nigel's Game Dev Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="../index.html" class="logo">
+									<span class="symbol"><img src="../images/game-development.svg" alt="" /></span><span class="title">Nigel's Game Development Portfolio</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+						</div>
+					</header>
+
+				<!-- Menu -->
+				<nav id="menu">
+					<h2>Menu</h2>
+					<ul>
+						<li><a href="../index.html">Projects</a></li>
+						<li><a href="../aboutMe.html">About Me</a></li>
+                        <li><a href="../files/Nigel_Charleston_Resume_New.pdf">Resume</a></li>
+                        <li><a href="../desolationPlace.html">Desolation Place</a></li>
+						<li><a href="../io.html">IO</a></li>
+						<li><a href="../magicHat.html">The Magic Hat</a></li>
+						<!-- <li><a href="zelda.html">Zelda</a></li> -->
+					</ul>
+                </nav>
+
+                <div id="main">
+                    <div class="inner">
+                        <h1>Color and Map Preview (10/21/2020)</h1>
+                        <span class="image main"><img src="../images/ProceduralGeneration/Dragon_trees.jpg" alt="" /></span>
+                        <p> For this week, I implemented some bug fixes with the camera and UI, added support for 5 custom terrain components, and begain implementing oject placements. 
+                            
+                            Access webbuild here: <a href="../files/web_builds/Week10/index.html">link</a>
+						</p>
+                        <h2>2 Bug fixes + Terrain Support (5 hours)</h2>
+                        <p>
+                            The first fix I implemented was an issue with the the UI components looking 3D like. Last week, some of the components of the UI, especially the color preview cube on the custom terrain selectors 
+                            idd not look flat with the 2D canvas. To fix this, I switched from a perspective camera (where objects have a disernable depth to them) with an orthographic camera (where all objects have the same depth):
+                        </p>
+
+                        <img src="../images/ProceduralGeneration/Week10/orthographic_camara_issue.png" alt="Code Snippet" style="width:50%;height:auto;">
+
+                        <p>
+                            What is happening in the camera's view is not scaled properly with the size of the canvas: causing the canvas to appear to be much smaller than the perlin noise map. After being stuck on this for a while, 
+                            I realized we just need to scale the camera size significantly.
+                        </p>
+
+                        <img src="../images/ProceduralGeneration/Week10/orthographic_camera_fix.png" alt="Code Snippet" style="width:50%;height:auto;">
+                        <p>
+                            The second fix was in regards to the custom terrain: even though the custom terrain is in the scroll rect, you could still see the color preview cubes not in view. To resolve this, I switched the cube with a png image. Due to the cube not being a UI component,
+                            it appears that is was not affected by the scroll rect:
+                        </p>
+
+                        <p>
+                            During this, I had a frustrating error appear that was quite easy in hindsight to resolve: for some reason, the script I used for implementing the color picker was reporting that the reference to the image was undefined.
+                            It turns out that I had the old cube objects (now disabled) attached as public references for script to use, which resulted in undefined behavior:
+                        </p>
+
+                        <img src="../images/ProceduralGeneration/Week10/image_error.PNG" alt="Code Snippet" style="width:50%;height:auto;">
+
+                        <p>
+                            Luckly the fix was easy: update the public references to point to the images....
+                        </p>
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week10/resolving_cube_outside_scrollrect.mp4' frameborder='0' allowfullscreen></iframe></div>
+
+                        <p>
+                            <h3>Custom Terrain</h3>
+                            With those fixes out of the way, I added the support to add up to 5 pieces of custom terrain onto the generated map. To do this, I revised my implementation for making the components appear/disappear from the 
+                            UI depending on what mode is selected. Now, the implementation accounts for a variable number of terrain. We keep track of an index to the currently activated terrain. If the slider value (when the function is called)
+                            is greater, we enable any componenets within the range of [current_index, slider_value]. If it is lower, then we disable components within the same range:
+                         </p>
+                        
+                        <img src="../images/ProceduralGeneration/Week10/improve_terrain_shut_off.png" alt="Code Snippet" style="width:50%;height:auto;">
+                        <p>
+                            We can now disable or enable any range of custom terrain depending on the slider value: 
+                        </p>
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week10/turning_off_example.mp4' frameborder='0' allowfullscreen></iframe></div>
+                        <p>
+                            I thent time (modifying my data structures, setting up public references) to ensure that the new terrain componets interact correctly with the color map. At first, I got it to work with 4 custom terrain: 
+                        </p>
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week10/4_terrain_progres.mp4' frameborder='0' allowfullscreen></iframe></div> 
+                        <p>
+                            Then, I got the color map to work with 5 custom terrain objects. With my revised implementation, we could add much more in the future. 
+                        </p>
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week10/final_progress.mp4' frameborder='0' allowfullscreen></iframe></div>
+
+                        
+                        <p>
+                            <h2>Tree Placement (1 hours)</h2>
+                            With my remaining time, I looked into ways that we could procedurally place objects (ex. trees) onto the map. 
+                            I came across a simple solution on one of my stakeholder's websites <a href="https://www.redblobgames.com/maps/terrain-from-noise/#trees">(red blob games)</a>. The idea behind
+                            this algorithm is that we we generate noise, then use a constant value to determine how spacious or clustered those values will be. The higher the value is, the more spacious the 
+                            placement will be. For clustered points, we want lower values. The folowing screenshots show this effect as the constant value increases:
+                        </p>
+                        <img src="../images/ProceduralGeneration/Week10/tree_noise_r_1.PNG" alt="Code Snippet" style="width:50%;height:auto;">
+                        <img src="../images/ProceduralGeneration/Week10/tree_noise_r_2.PNG" alt="Code Snippet" style="width:50%;height:auto;">
+
+                        <p>
+                            This is a simple, but ineffient implementation of this idea:
+                        </p>
+                        <img src="../images/ProceduralGeneration/Week10/tree_placement_algorithm.PNG" alt="Code Snippet" style="width:50%;height:auto;">
+
+                        <p>
+                            My next steps will be to get the points indicated by the algorithm at "if(tree_noise[x,y] == maximum_noise)" onto the color map. In addition, I will have to consider a better way to
+                            perform the placement: algorithms such as <a href="http://devmag.org.za/2009/05/03/poisson-disk-sampling/">Possion Disc</a> are much more efficient, and give a better placement of values. 
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Scripts -->
+                <script src="assets/js/jquery.min.js"></script>
+                <script src="assets/js/browser.min.js"></script>
+                <script src="assets/js/breakpoints.min.js"></script>
+                <script src="assets/js/util.js"></script>
+                <script src="assets/js/main.js"></script>
+    
+        </body>
+    </html>

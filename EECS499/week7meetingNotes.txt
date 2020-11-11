@@ -1,0 +1,26 @@
+minecraft
+
+Not just one perlin noise, generates multiple
+	each texture is for different reasons
+		ex grass perlin
+		ex gold perlin
+		ex cave perlin?
+		ex mountains
+		
+		spread out but can go very high
+		
+		stacking perlin noise on each other and have them blend. 
+			couple perlin noise sheets. 
+				stack structure?
+				could be very useful
+					some of different sizes that add to each other
+					
+					and you can get areas of smoothness and feel
+					
+					shaders: layer different noise patterns to break them up 
+					(and cannot recognize patterns)
+					
+					volitile? useful?
+					
+		get rid of skybox
+		make terrain infinite.
