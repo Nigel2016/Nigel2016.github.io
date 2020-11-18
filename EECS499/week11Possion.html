@@ -68,7 +68,7 @@
                             attempt to use x_offset and y_offset to compute maximal noise values to store in the tree_noise map. What ends up happening is that the number of iterations those inner for loops (x_offset,y_offset) increases
                             as the width and height increases. So it you have a 50x50 input, the number of loops necessary for the algorithm would roughly be 50*50*(1.....50)(1.......50):
                         </p>
-                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week11/freeze.mp4' frameborder='0' allowfullscreen></iframe></div>
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/week11/freeze.mp4' frameborder='0' allowfullscreen></iframe></div>
                         <p>
                             After I realized how severe the algorithm was to runtime, I gave up on getting it to work. Instead, I focused my attention on implementing a poisson disc instead.
                             The idea behind this algorithm is that you generate points around pre-existing values, then check to see if they are within a minimum distance. If they are, then we
@@ -77,22 +77,22 @@
                             The following picture illustrates the usefulness of poisson:
                         </p>
 
-                        <img src="../images/ProceduralGeneration/Week11/Poisson_Disk_Sampling-figure 1.jpg" alt="poisson vs. naive approach" style="width:50%;height:auto;">
+                        <img src="../images/ProceduralGeneration/week11/Poisson_Disk_Sampling-figure 1.jpg" alt="poisson vs. naive approach" style="width:50%;height:auto;">
 
                         <p>While implemented the algorithm, I struggled with various bugs that were time-consuming to resolve. One issue was with how I was attempting to test if my implementation
                            was working. After generating the points, I attempted to draw them out in the editor using gizmos. For a while, the points were not being drawn out at all: </p>
-                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week11/gizmos.mp4' frameborder='0' allowfullscreen></iframe></div>
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/week11/gizmos.mp4' frameborder='0' allowfullscreen></iframe></div>
                         <p>
                             I forgot the switch on the tiny "gizmos" button in the editor! In addition, the object attached to the gizmos must be in view of the camera; when I created objects to place the test script, they were generated at far away locations.
                              Changing the locations to (0,0,0) and turning on the gizmos button got the script to work:
                         </p>
-                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week11/possion_disc_working.mp4' frameborder='0' allowfullscreen></iframe></div> 
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/week11/possion_disc_working.mp4' frameborder='0' allowfullscreen></iframe></div> 
 
                         <p>
                             Due to time constraints, to demonstrate the possion disc can work with the color map, I iterate through the disc points, and replace pixels where the points are roughly located with a black color. As a result, 
                             you will notice that many of the pixels in the image are darker. 
                         </p>
-                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week11/black_out_possion.mp4' frameborder='0' allowfullscreen></iframe></div>
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/week11/black_out_possion.mp4' frameborder='0' allowfullscreen></iframe></div>
                         <p>
                             With this implementation working, we can modify the code to place objects on top of the  map instead of simply overwriting the colors. This will come in the next week or so. 
                         </p>
