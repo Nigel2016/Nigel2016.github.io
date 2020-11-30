@@ -58,17 +58,12 @@
                         </p>
                         
                         <h2>Crafting Personalized Emails for potential stakeholders. (2 Hours) </h2>
-                        <p>With the list of the five stakeholders I found last week, I began to make personalized
-                           messages to reach out to them. In these messages (4-5 sentences) I stated the purpose of
-                           my research, and asked each stakeholder for an brief interview (phone or virtual). A key
+                        <p>With the list of the five stakeholders I found last week, I began to make personalized messages to reach out to them. In these messages (4-5 sentences) I stated the purpose of my research and asked each stakeholder for a brief interview (phone or virtual). A key
                            component of these messages was personalization: in each message, I mentioned how
-                           I came across the stakeholder (whether it be a blog post, or word of mouth), and what
-                           I stood to gain from their advice. By doing this, I hoped to maximize my chances of getting
-                           a response back. 
+                           I came across the stakeholder (whether it be a blog post or word of mouth), and what
+                           I stood to gain from their advice. By doing this, I hoped to maximize my chances of getting a response back. 
 
-                           Within 2 hours, 2 of the stakeholders reached out to me! One of them sent me a few additional
-                           resources on the procedural technology they used in a recent AAA title. The other agreed to
-                           speak to me via discord tomorrow (thursday).
+                           Within 2 hours, 2 of the stakeholders reached out to me! One of them sent me a few additional resources on the procedural technology they used in a recent AAA title. The other agreed to speak to me via discord tomorrow (Thursday).
                         </p>
 
                         <h2>Prototype (4 hours)</h2>
@@ -78,7 +73,7 @@
 
                             My initial idea for this tool is that it will allow a developer to specify information about a 3D level 
                             they want to create (such as Seed, Custom Perlin Noise), and the tool will automatically generate the level for them.
-                            Below, I will break down how this prtotype works.
+                            Below, I will break down how this prototype works.
                         </p>
                         <h3>Perlin Noise</h3>
                         <p>
@@ -86,9 +81,7 @@
                             that generates psuedo-random numbers:
                             <span class="image main"><img src="../images/ProceduralGeneration/noise-whitenoise.png" alt="" /></span>
 
-                            The issue with using pure randomness in procedural generation is that it is not guaranteed to generate
-                            numbers that are related to each other. Without a discernible pattern, it is difficult to control the
-                            quality of what our algorithm produces. However, with perlin noise, we can generate numbers on a smooth curve,
+                            The issue with using pure randomness for procedural generation is that it is not guaranteed to generate numbers that are related to each other. Without a discernible pattern, it is difficult to control the quality of what our algorithm produces. However, with Perlin noise, we can generate numbers on a smooth curve,
                             leading to more impactful results:
                             <span class="image main"><img src="../images/ProceduralGeneration/improved_perlin_2.gif" alt="" /></span>
 
@@ -96,23 +89,21 @@
                             (width on the x-axis):
                             <span class="image main"><img src="../images/ProceduralGeneration/lone_octave.PNG" alt="" /></span>
 
-                            We call variations of these noise curves octaves. By layering octaves on each other, we can create unique
-                            curve patterns for our geometry. Moreover, "lacunarity" can be used to increase the frequency of the octaves,
-                            and "persistance" can be utilized to decreate the amplitude of the octaves. We need these two variables to 
-                            the octaves increase in detail as they are added together. Morover, we want to ensure that that previous
-                            octave layers are not influenced by the next onces to be added (leading to uniquness in the result):
+                            We call variations of these noise curves octaves. By layering octaves on each other, we can create unique curve patterns for our geometry. Moreover, "lacunarity" can be used to increase the frequency of the octaves,
+                            and "persistence" can be utilized to decrease the amplitude of the octaves. We need these two variables to the octaves increase in detail as they are added together. Moreover, we want to ensure that that previous
+                            octave layers are not influenced by the next ones to be added (leading to uniqueness in the result):
                             <span class="image main"><img src="../images/ProceduralGeneration/combine_octaves.PNG" alt="" /></span>
 
                         </p>
                         <h3>Color and Mesh</h3>
                         <p>
                             After building customizable plane with perlin noise, we can start to add color and meshes to the plane.
-                            Using texture2D and Color objects provided by Unity, we can scetch unique patterns on top of the perlin plane:
+                            Using texture2D and Color objects provided by Unity, we can sketch unique patterns on top of the Perlin plane:
 
                             For meshes, we have to begin thinking of the plane as a grid of verticies:
                             <span class="image main"><img src="../images/ProceduralGeneration/mesh_theory.PNG" alt="" /></span>
 
-                            Meshes are a data structure which is composed of triangles. To render them, we have to organize a 2D array of verticies, 
+                            Meshes are a data structure that is composed of triangles. To render them, we have to organize a 2D array of verticies, 
                             and connect them together. For every 3 tuple of verticies (i, i+1, i+2), we will draw 3 edges which forms a triangle. Overtall,
                             the final result turned out great:
                             <span class="image main"><img src="../images/ProceduralGeneration/initial_color.png" alt="" /></span>
@@ -133,7 +124,7 @@
 
                             As a final touch, I added an optimization to the mesh generation. Meshes in Unity can only have a certain number of triangles before
                             performance drops. To mitigate this issue, we can reorganize the triangles into terrain chunks: if we group a range of 
-                            verticies from [i to i*2], we can make the plane larger, but reduce the number of triangles drawn signficantly (improving
+                            vertices from [i to i*2], we can make the plane larger, but reduce the number of triangles drawn significantly (improving
                             performance):
                             <span class="image main"><img src="../images/ProceduralGeneration/final_2.gif" alt="" /></span>
 
@@ -141,9 +132,7 @@
 
                         <h3>Final Thoughts</h3>
                         <p>
-                            This technical experiement proves that my research idea is possible. There are an abundance of resources for learning procedural generation
-                            algorithms. Moreover, engines like Unity and Unreal allow for custom editors; so I can build the tool on top of these engines to
-                            decrease development time.
+                            This technical experiment proves that my research idea is possible. There is an abundance of resources for learning procedural generation algorithms. Moreover, engines like Unity and Unreal allow for custom editors; so I can build the tool on top of these engines to decrease development time.
 
                             For next steps, I need to start thinking of how I can make my project more novel. Right now, there are already tools avaliable for generating 
                             land masses automatically. The prototype at the moment does not offer options for adding entites (items of interests, gameplay features, enemies and players)
