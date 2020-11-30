@@ -50,54 +50,53 @@
 
                 <div id="main">
                     <div class="inner">
-                        <h1>Color and Map Preview (10/21/2020)</h1>
+                        <h1>Custom Textures (10/28/2020)</h1>
                         <span class="image main"><img src="../images/ProceduralGeneration/Dragon_trees.jpg" alt="" /></span>
                         <p> For this week, I began working on stack color terrain together; giving the user the option to customize the map further. 
                             
-                            Access webbuild here: <a href="../files/web_builds/Week8/index.html">link</a>
-						</p>
-						<h2>Adding Custom Terrain Support (6 hours)</h2>
-						<p>The motivation for custom terrain support is the ability to add multiple layers of custom perlin noise to the map. A game like Minecraft may contain
-							multiple layers of perlin noise (ex. one for water biomes, one for item pickups, one for green terrain). To get this feature into the tool, I began
-							implementing a custom terrain UI prefab, which has the following parameters:
-							<ul>
-								<li>Height: customizes the height of the texture in the map.</li>
-								<li>Name: a designated name for the texture provided by the user.</li>
-								<li>Red: Texture red color.</li>
-								<li>Green: Texture green color.</li>
-								<li>Blue: Texture blue color.</li>
-								<li>Cube: a cube that shows the user the results of blending the 3 RBG values together.</li>
+                            Access webbuild here: <a href="../files/web_builds/Week13/index.html">link</a>
+                        </p>
+                        <h2>Adding Custom Terrain Support (6 hours)</h2>
+                        <p>The motivation for custom terrain support is the ability to add multiple layers of custom perlin noise to the map. A game like Minecraft may contain
+                            multiple layers of perlin noise (ex. one for water biomes, one for item pickups, one for green terrain). To get this feature into the tool, I began
+                            implementing a custom terrain UI prefab, which has the following parameters:
+                            <ul>
+                                <li>Height: customizes the height of the texture in the map.</li>
+                                <li>Name: a designated name for the texture provided by the user.</li>
+                                <li>Red: Texture red color.</li>
+                                <li>Green: Texture green color.</li>
+                                <li>Blue: Texture blue color.</li>
+                                <li>Cube: a cube that shows the user the results of blending the 3 RBG values together.</li>
 
-							</ul>
-						</p>
+                            </ul>
+                        </p>
 
-						<img src="../images/ProceduralGeneration/Week8/color_pick_prefab.png" alt="color pick prefab" style="width:100%;height:auto;">
-						<p>After spending time setting up the prefab, and getting the code logic for changing the cubes color working, I then added a way for the user
-							to add/remove the custom textures as needed in the UI:
-						</p>
-						<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week8/two_customs.mp4' frameborder='0' allowfullscreen></iframe></div> 
-						
-						<p>Furthermore, I had to figure out a way that I can add the custom textures to the existing color map. After spending a while troubleshooting different
-							approaches, I modified my generate map function to reserve two spots in the color map for the user's custom textures. Some logic in the implementation is shown
-							below: 
-						</p>
-						<img src="../images/ProceduralGeneration/Week8/code_snippet_1.png" alt="Code Snippet" style="width:100%;height:auto;">
-						<img src="../images/ProceduralGeneration/Week8/code_snippet_2.png" alt="Code Snippet" style="width:100%;height:auto;">
+                        <img src="../images/ProceduralGeneration/Week8/color_pick_prefab.png" alt="color pick prefab" style="width:100%;height:auto;">
+                        <p>After spending time setting up the prefab, and getting the code logic for changing the cubes color working, I then added a way for the user
+                            to add/remove the custom textures as needed in the UI:
+                        </p>
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week8/two_customs.mp4' frameborder='0' allowfullscreen></iframe></div> 
+                        
+                        <p>Furthermore, I had to figure out a way that I can add the custom textures to the existing color map. After spending a while troubleshooting different
+                            approaches, I modified my generate map function to reserve two spots in the color map for the user's custom textures. Some logic in the implementation is shown
+                            below: 
+                        </p>
+                        <img src="../images/ProceduralGeneration/Week8/code_snippet_1.png" alt="Code Snippet" style="width:100%;height:auto;">
+                        <img src="../images/ProceduralGeneration/Week8/code_snippet_2.png" alt="Code Snippet" style="width:100%;height:auto;">
 
-						<p>This approach initially did not work. After a few hours of debugging, I realized that some settings I had for the custom textures in the code were incorrectly set.
-							Furthermore, I had to modify my exiting generate map code to account for the two entries reserved for the user's custom terrain:
-						</p>
-						<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week8/make_custom_appear.mp4' frameborder='0' allowfullscreen></iframe></div>
+                        <p>This approach initially did not work. After a few hours of debugging, I realized that some settings I had for the custom textures in the code were incorrectly set.
+                            Furthermore, I had to modify my exiting generate map code to account for the two entries reserved for the user's custom terrain:
+                        </p>
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week8/make_custom_appear.mp4' frameborder='0' allowfullscreen></iframe></div>
 
-						<p>Eventually I was able to get my code working with 1 custom terrain: </p>
-						<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week8/success.mp4' frameborder='0' allowfullscreen></iframe></div>                                                                        
-						<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week8/one_color.mp4' frameborder='0' allowfullscreen></iframe></div>        
-						<p>Then with 2 custom terrain:</p>                            
-						<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week8/two_colors.mp4' frameborder='0' allowfullscreen></iframe></div>
-	
-						<p>For the future, I think I need to start considering cleaning up the UI so that it is more user friendly. I want to have it in a way that it can be immediately 
-							intuitive for someone to use. In addition, I also have to clean up the code base so that it is better documented and cleaner with respect to coding standards.
-						</p>
+                        <p>Eventually I was able to get my code working with 1 custom terrain: </p>
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week8/success.mp4' frameborder='0' allowfullscreen></iframe></div>                                                                        
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week8/one_color.mp4' frameborder='0' allowfullscreen></iframe></div>        
+                        <p>Then with 2 custom terrain:</p>                            
+                        <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week8/two_colors.mp4' frameborder='0' allowfullscreen></iframe></div>
+    
+                        <p>For the future, I think I need to start considering cleaning up the UI so that it is more user friendly. I want to have it in a way that it can be immediately intuitive for someone to use. I also have to clean up the codebase so that it is better documented and cleaner concerning coding standards.
+                        </p>
                     </div>
                 </div>
 
