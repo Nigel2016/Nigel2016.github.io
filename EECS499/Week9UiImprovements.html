@@ -54,16 +54,14 @@
                         <span class="image main"><img src="../images/ProceduralGeneration/Dragon_trees.jpg" alt="" /></span>
                         <p> For this week, I worked on improvements to the UI: both code organization and layout of components on the tool. 
                             
-                            Access webbuild here: <a href="../files/web_builds/Week9/index.html">link</a>
-						</p>
-						<h2>UI Improvements (6 hours)</h2>
-                        <p>During this sprint, I watched several videos on user interface development. One of the first steps I took to improve the current UI was by moving any code specific to its operation to be in its own class/script. By using this script, UIComponents.cs, I can keep my
-                        main file for generating meshs clean, and group functions together by purpose. 
+                            <b>Access web build here: <a href="../files/web_builds/Week13/index.html">link</a></b>
+                        </p>
+                        <h2>UI Improvements (6 hours)</h2>
+                        <p>During this sprint, I watched several videos on user interface development. One of the first steps I took to improve the current UI was to move any code specific to its operation to be in its own class/script. By using this script, UIComponents.cs, I can keep my
+                        main file for generating meshes clean, and group functions together by purpose. 
                         </p>
                         <img src="../images/ProceduralGeneration/Week9/slider_code.PNG" alt="Code Snippet" style="width:50%;height:auto;">
-                        <p>It took a few hours of debugging to resolve issues tied to this change. Some variables are ncessary in my main class in order to generate the maps; to allow 
-                            my UIComponent script to access these variables, I use the "protected" keyword on those variables, and make the UIController a child class. I also had to reassign
-                            the script to the Canvas to prevent duplicate references in the unity editor. The variables used to be public, but now, will be private to the UI class.
+                        <p>It took a few hours of debugging to resolve issues tied to this change. Some variables are necessary for my main class to generate the maps. To allow my UIComponent script to access these variables, I use the "protected" keyword on those variables and make the UIController a child class. I also had to reassign the script to the Canvas to prevent duplicate references in the unity editor. The variables used to be public, but now, will be private to the UI class.
                         </p>
                         <img src="../images/ProceduralGeneration/Week9/do_these_need_to_be_here.PNG" alt="color pick prefab" style="width:50%;height:auto;">
                         <p>Furthermore, I cleaned up the UI so that functions specific to a particular mode only show up when that mode is selected.</p>

@@ -52,20 +52,19 @@
                     <div class="inner">
                         <h1>Color and Map Preview (10/21/2020)</h1>
                         <span class="image main"><img src="../images/ProceduralGeneration/Dragon_trees.jpg" alt="" /></span>
-                        <p> For this week, I implemented some bug fixes with the camera and UI, added support for 5 custom terrain components, and begain implementing oject placements. 
+                        <p> For this week, I implemented some bug fixes with the camera and UI, added support for 5 custom terrain components, and began implementing object placements. 
                             
-                            Access webbuild here: <a href="../files/web_builds/Week10/index.html">link</a>
-						</p>
+                            Access web build here: <a href="../files/web_builds/Week13/index.html">link</a>
+                        </p>
                         <h2>2 Bug fixes + Terrain Support (5 hours)</h2>
                         <p>
-                            The first fix I implemented was an issue with the the UI components looking 3D like. Last week, some of the components of the UI, especially the color preview cube on the custom terrain selectors 
-                            idd not look flat with the 2D canvas. To fix this, I switched from a perspective camera (where objects have a disernable depth to them) with an orthographic camera (where all objects have the same depth):
+                            The first fix I implemented was an issue with the UI components looking 3D like. Last week, some of the components of the UI, especially the color preview cube on the custom terrain selectors did not look flat with the 2D canvas. To fix this, I switched from a perspective camera (where objects have a discernable depth to them) with an orthographic camera (where all objects have the same depth):
                         </p>
 
                         <img src="../images/ProceduralGeneration/Week10/orthographic_camara_issue.png" alt="Code Snippet" style="width:50%;height:auto;">
 
                         <p>
-                            What is happening in the camera's view is not scaled properly with the size of the canvas: causing the canvas to appear to be much smaller than the perlin noise map. After being stuck on this for a while, 
+                            What is happening in the camera's view is not scaled properly with the size of the canvas: causing the canvas to appear to be much smaller than the Perlin noise map. After being stuck on this for a while, 
                             I realized we just need to scale the camera size significantly.
                         </p>
 
@@ -77,13 +76,13 @@
 
                         <p>
                             During this, I had a frustrating error appear that was quite easy in hindsight to resolve: for some reason, the script I used for implementing the color picker was reporting that the reference to the image was undefined.
-                            It turns out that I had the old cube objects (now disabled) attached as public references for script to use, which resulted in undefined behavior:
+                            It turns out that I had the old cube objects (now disabled) attached as public references for the script to use, which resulted in undefined behavior:
                         </p>
 
                         <img src="../images/ProceduralGeneration/Week10/image_error.PNG" alt="Code Snippet" style="width:50%;height:auto;">
 
                         <p>
-                            Luckly the fix was easy: update the public references to point to the images....
+                            Luckily the fix was easy: update the public references to point to the images...
                         </p>
                         <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week10/resolving_cube_outside_scrollrect.mp4' frameborder='0' allowfullscreen></iframe></div>
 
@@ -91,7 +90,7 @@
                             <h3>Custom Terrain</h3>
                             With those fixes out of the way, I added the support to add up to 5 pieces of custom terrain onto the generated map. To do this, I revised my implementation for making the components appear/disappear from the 
                             UI depending on what mode is selected. Now, the implementation accounts for a variable number of terrain. We keep track of an index to the currently activated terrain. If the slider value (when the function is called)
-                            is greater, we enable any componenets within the range of [current_index, slider_value]. If it is lower, then we disable components within the same range:
+                            is greater, we enable any components within the range of [current_index, slider_value]. If it is lower, then we disable components within the same range:
                          </p>
                         
                         <img src="../images/ProceduralGeneration/Week10/improve_terrain_shut_off.png" alt="Code Snippet" style="width:50%;height:auto;">
@@ -100,7 +99,7 @@
                         </p>
                         <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week10/turning_off_example.mp4' frameborder='0' allowfullscreen></iframe></div>
                         <p>
-                            I thent time (modifying my data structures, setting up public references) to ensure that the new terrain componets interact correctly with the color map. At first, I got it to work with 4 custom terrain: 
+                            Next, I tested (modifying my data structures, setting up public references) to ensure that the new terrain componets interact correctly with the color map. At first, I got it to work with 4 custom terrain: 
                         </p>
                         <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week10/4_terrain_progres.mp4' frameborder='0' allowfullscreen></iframe></div> 
                         <p>
@@ -125,8 +124,7 @@
                         <img src="../images/ProceduralGeneration/Week10/tree_placement_algorithm.PNG" alt="Code Snippet" style="width:50%;height:auto;">
 
                         <p>
-                            My next steps will be to get the points indicated by the algorithm at "if(tree_noise[x,y] == maximum_noise)" onto the color map. In addition, I will have to consider a better way to
-                            perform the placement: algorithms such as <a href="http://devmag.org.za/2009/05/03/poisson-disk-sampling/">Possion Disc</a> are much more efficient, and give a better placement of values. 
+                            My next steps will be to get the points indicated by the algorithm at "if(tree_noise[x,y] == maximum_noise)" onto the color map. Also, I will have to consider a better way to perform the placement: algorithms such as the <a href="http://devmag.org.za/2009/05/03/poisson-disk-sampling/">Possion Disc</a> are much more efficient and give a better placement of values. 
                         </p>
                     </div>
                 </div>

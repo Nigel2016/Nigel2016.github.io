@@ -55,46 +55,46 @@
                         <p> For this week, I struggled to get my original placement algorithm to work, and implemented a poisson distribution algorithm to replace it. The poisson not only gives better results, it
                             is also much more efficient. 
                             
-                            Access webbuild here: <a href="../files/web_builds/Week11/index.html">link</a>
+                            Access webbuild here: <a href="../files/web_builds/Week13/index.html">link</a>
 						</p>
-                        <h2>Poisson Implementation(6 hours)</h2>
+                        <h2>Poisson Implementation (6 hours)</h2>
                         <p>
-                            For a good hour or 2, I was stuck on getting the naive algorithm for object placement to work. The algorithm is seen below:
-                        </p>
+                            For a few hours, I was stuck on getting the naive algorithm for object placement to work. The algorithm is seen below:                        </p>
                         <img src="../images/ProceduralGeneration/Week10/tree_placement_algorithm.PNG" alt="Code Snippet" style="width:50%;height:auto;">
                         <p>
-                            Whenever I pressed the play button in the unity editor, the entire engine would freeze. In order to stop the freezing, I had to go into my task manager, and kill the unity process. At first,
-                            I though this was an issue with a debugger I was trying to setup. However, the actual problem was that the algorithm was too inefficient. Essential, for the height and width dimensions, the algorithm would
-                            attempt to use x_offset and y_offset to compute maximal noise values to store in the tree_noise map. What ends up happening is that the number of iterations those inner for loops (x_offset,y_offset) increases
-                            as the width and height increases. So it you have a 50x50 input, the number of loops necessary for the algorithm would roughly be 50*50*(1.....50)(1.......50):
+                            Whenever I pressed the play button in the unity editor, the entire engine would freeze. To stop the freezing, I had to go into my task manager, and kill the unity process. At first,
+                            I thought this was an issue with a debugger I was trying to set up. However, the actual problem was that the algorithm was too inefficient. 
+                            Essential, for the height and width dimensions, the algorithm would attempt to use x_offset and y_offset to compute maximal noise values to store in the tree_noise map. 
+                            What ends up happening is that the number of iterations those inner for loops (x_offset,y_offset) increases as the width and height increase. 
+                            For example, if there is a 50x50 input, the number of loops necessary for the algorithm would roughly be 50*50*(1.....50)(1.......50):
                         </p>
                         <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/week11/freeze.mp4' frameborder='0' allowfullscreen></iframe></div>
                         <p>
-                            After I realized how severe the algorithm was to runtime, I gave up on getting it to work. Instead, I focused my attention on implementing a poisson disc instead.
-                            The idea behind this algorithm is that you generate points around pre-existing values, then check to see if they are within a minimum distance. If they are, then we
-                            can add them to an output list. To speedup the lookup of points in the algorithm, we store a grid of points that have been generated so far. The result of the algorithm
-                            are far better than just randomly picking points, as it looks for discernible patterns in the distribution. A visualization of the poisson disc is avaliable at <a href="http://devmag.org.za/2009/05/03/poisson-disk-sampling/">devmag.org</a>.
-                            The following picture illustrates the usefulness of poisson:
+                            After I realized how severe the algorithm was to runtime, I gave up on getting it to work. Instead, I focused my attention on implementing a Poisson disc instead.
+                            The idea behind this algorithm is that you generate points around pre-existing values, then check to see if they are within a minimum distance. If they are, then we can add them to an output list. 
+                            To speed up the lookup of points in the algorithm, we store a grid of points that have been generated so far. 
+                            The result of the algorithm is far better than just randomly picking points, as it looks for discernible patterns in the distribution. 
+                            A visualization of the Poisson disc is available at <a href="http://devmag.org.za/2009/05/03/poisson-disk-sampling/">devmag.org</a>.
+                            The following picture illustrates the usefulness of Poisson:
                         </p>
 
                         <img src="../images/ProceduralGeneration/week11/Poisson_Disk_Sampling-figure 1.jpg" alt="poisson vs. naive approach" style="width:50%;height:auto;">
 
-                        <p>While implemented the algorithm, I struggled with various bugs that were time-consuming to resolve. One issue was with how I was attempting to test if my implementation
-                           was working. After generating the points, I attempted to draw them out in the editor using gizmos. For a while, the points were not being drawn out at all: </p>
+                        <p>While implemented the algorithm, I struggled with various bugs that were time-consuming to resolve. One issue was with how I was attempting to test if the implementation was working. After generating the points, I attempted to draw them out in the editor using gizmos. For a while, the points were not being drawn out at all: </p>
                         <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/week11/gizmos.mp4' frameborder='0' allowfullscreen></iframe></div>
                         <p>
-                            I forgot the switch on the tiny "gizmos" button in the editor! In addition, the object attached to the gizmos must be in view of the camera; when I created objects to place the test script, they were generated at far away locations.
+                            I forgot the switch on the tiny "gizmos" button in the editor! Also, the object attached to the gizmos must be in view of the camera; when I created objects to place the test script, they were generated at faraway locations.
                              Changing the locations to (0,0,0) and turning on the gizmos button got the script to work:
                         </p>
                         <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/week11/possion_disc_working.mp4' frameborder='0' allowfullscreen></iframe></div> 
 
                         <p>
-                            Due to time constraints, to demonstrate the possion disc can work with the color map, I iterate through the disc points, and replace pixels where the points are roughly located with a black color. As a result, 
+                            Due to time constraints, to demonstrate the Poisson disc can work with the color map, I iterate through the disc points and replace pixels where the points are roughly located with black color. As a result, 
                             you will notice that many of the pixels in the image are darker. 
                         </p>
                         <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/week11/black_out_possion.mp4' frameborder='0' allowfullscreen></iframe></div>
                         <p>
-                            With this implementation working, we can modify the code to place objects on top of the  map instead of simply overwriting the colors. This will come in the next week or so. 
+                            With this implementation working, we can modify the code to place objects on top of the map instead of simply overwriting the colors. This will come in the next week or so. 
                         </p>
                     </div>
                 </div>
