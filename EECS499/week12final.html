@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Nigel's Game Dev Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="../index.html" class="logo">
+									<span class="symbol"><img src="../images/game-development.svg" alt="" /></span><span class="title">Nigel's Game Development Portfolio</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+						</div>
+					</header>
+
+				<!-- Menu -->
+				<nav id="menu">
+					<h2>Menu</h2>
+					<ul>
+						<li><a href="../index.html">Projects</a></li>
+						<li><a href="../aboutMe.html">About Me</a></li>
+                        <li><a href="../files/Nigel_Charleston_Resume_New.pdf">Resume</a></li>
+                        <li><a href="../desolationPlace.html">Desolation Place</a></li>
+						<li><a href="../io.html">IO</a></li>
+                        <li><a href="../magicHat.html">The Magic Hat</a></li>
+                        <li><a href="../automationGenerationBlog.html">Research Project On Procedural Generation</a></li>
+						<!-- <li><a href="zelda.html">Zelda</a></li> -->
+					</ul>
+                </nav>
+
+                <div id="main">
+                    <div class="inner">
+                        <h1>Final Blog (12/1/2020)</h1>
+                        <span class="image main"><img src="../images/ProceduralGeneration/Dragon_trees.jpg" alt="" /></span>
+                        <p> For this week, I fixed several bugs with the tool and demo'd my project with a stakeholder. In addition, I ran into a roadblock with the Unity Engine that prevented me
+                            from implementing an export feature. 
+                        </p>
+                        <p>
+                            <b>Access most recent webbuild here: <a href="../files/web_builds/Week13/index.html">Click Link</a></b>
+                        </p>
+                        <h2>Export (3 hours)</h2>
+                        <p>
+                            One of the features are wanted for the tool was the ability to export user meshes to an external file format. I tried 2 formats: obj and fbx. Obj format does not work well
+                            since it stores no information regarding a meshes materials to the file; only physical information such as the list of verticies to construct the mesh. Given this, FBX format
+                            is ideal. Unity has an FBX export package that works nicely. However, I ran into two additional issues:
+                            <ol>
+                                <li>Whenever I attempted to export the mesh during play mode in the Unity editor, the plane generated would be missing its materials. I believe this issue is due to file serialization:
+                                    the FBX exporter may be using the underlying files on the game objects to generate the mesh. This means that any modifcations during play mode (such as the material information) 
+                                    may not be written to disk. The exporter works fine outside of runtime however.  
+                                </li>
+                                <li>
+                                    When I attempted to use another FBX exporter tool, which supports runtime mesh conversion, webGL ran into an issue discribed below:
+                                </li>
+                            </ol>
+                            <img src="../images/ProceduralGeneration/Week12/webGLIssue.png" alt="Code Snippet" style="width:100%;height:auto;">
+
+                            The tool is having an issue finding a path to write the .fbx file to. After looking up the issue, I discovered that WebGL has no means to interface with the user's local file system. This means that 
+                            saving the mesh to any file system is not possible with WebGL alone. To resolve this, I would have to either write my own file system interface, or look into writing javascript code on the server side
+                            to enable this functionality. However, with my final presentaiton coming up in a few days, this is not feasible. The export feature will have to be tabled for now. 
+
+                         </p>
+                         <h2>Bug Fixes (3 hours)</h2>
+                         <p>
+                            Signficant time was spent fixing bugs. One issue dealt with the generation of maps. Whenever the user attempts to generate a mesh map
+                            without having a color map first, the map becomes blank. To fix this, I added a simple check to verify that a mesh has been generated
+                            prior to going into mesh mode. If it has not happened, then the user will be stuck in their current mode, and receive a warning:
+                            <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week12/meshCheck.mp4' frameborder='0' allowfullscreen></iframe></div>
+
+                            Another issue that appeared was that previous custom terrain information was not being cleared when a user switched back to noise mode. 
+                            So it was possible that pre-existing custom terrain would effect a new meshes results. I implemented a fix to clear custom terrain entries whenever the user switches back to noise mode:
+                            <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week12/clearTerrain.mp4' frameborder='0' allowfullscreen></iframe></div>
+
+
+                            More fixes were made, such as increasing the player's movement speed, and fixing an exception that would sometimes generate when 
+                            modes were switched. In addition, I went through all of my previous blog posts, and polished them  (fixing grammar mistakes, adding additional information). I have now exposed links to my blog to my actual website
+                            since it is reaching its final stages. 
+                         </p>
+                         <h2>Preparation for Design Expo (1+ hours)</h2>
+                         <p>
+                             The Design expo takes place on Thursday, December 4th from 5-7pm. During this time, I will need to give a 5-10 minute presentaion on my project.
+                             In preparation for this, I created a slideshow and did a mock presentation with one of my stakeholders, Apoorva from Sucker Punch. Overall, feedback on
+                             my presentation was positive, with some feedback critiquing my slides and working on better ways to present information on certain slides. For this coming
+                             week, I will focus on polishing the slides and practicing my speech. 
+                         </p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Scripts -->
+                <script src="../assets/js/jquery.min.js"></script>
+                <script src="../assets/js/browser.min.js"></script>
+                <script src="../assets/js/breakpoints.min.js"></script>
+                <script src="../assets/js/util.js"></script>
+                <script src="../assets/js/main.js"></script>
+    
+        </body>
+    </html>
