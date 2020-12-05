@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Nigel's Game Dev Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="../index.html" class="logo">
+									<span class="symbol"><img src="../images/game-development.svg" alt="" /></span><span class="title">Nigel's Game Development Portfolio</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+						</div>
+					</header>
+
+				<!-- Menu -->
+				<nav id="menu">
+					<h2>Menu</h2>
+					<ul>
+						<li><a href="../index.html">Projects</a></li>
+						<li><a href="../aboutMe.html">About Me</a></li>
+                        <li><a href="../files/Nigel_Charleston_Resume_New.pdf">Resume</a></li>
+                        <li><a href="../desolationPlace.html">Desolation Place</a></li>
+						<li><a href="../io.html">IO</a></li>
+                        <li><a href="../magicHat.html">The Magic Hat</a></li>
+                        <li><a href="../automationGenerationBlog.html">Research Project On Procedural Generation</a></li>
+						<!-- <li><a href="zelda.html">Zelda</a></li> -->
+					</ul>
+                </nav>
+
+                <div id="main">
+                    <div class="inner">
+                        <h1>Conclusion of EECS 499 (12/4/2020)</h1>
+                        <p>This post will conclude my experience in EECS 499. I will discuss the recent Design Expo, and give future directions for the tool.</p>
+                        <h2>Design Expo</h2>
+                        <p> Unlike previous semesters, this event was fully remote, and I hosted an online conference amongst 100+ other projects, 
+                            including the projects of my other peers in EECS 499. However, attendance for the most part was very low. 
+                            I was the luckiest of the 499 students and was able to talk to 6 different students throughout the 4 hours 
+                            I was required to partake in the event. However, the event appears to have been poorly marketed; the university
+                            made no formal announcements of the event, and many of the student presentations had a low turnout. 
+                            I think in the future the University should reconsider its approach for a virtual expo. 
+                            One possible idea that may have improved turnout was gathering everyone within one Livestream, and then
+                            giving each project team 5-10 minutes to discuss their work. 
+                            This would allow for all people to gain exposure to the diversity of projects that students worked hard on.  
+                        </p>
+                        <h2>Summary and Future Directions</h2>
+                        <p>
+                            One of my major goals for this project was to demonstrate the procedural generation was a viable means for automating level prototyping. I believe that I was able to accomplish this:
+                            <ul>
+                                <li>Generate a basic plane with customizable perlin noise.</li>
+                                <li>Build a color structure on top of the perlin noise, allowing uses to create colorful maps.</li>
+                                <li>Add custom terrain (up to 5) onto the existing color map, allowing users to further customize the specific look.</li>
+                                <li>Go into "mesh" mode with the tool and enable users to give the collor map height.</li>
+                                <li>Preview the map in an interactive mode, and allow users to regenerate the map if it is not to their liking.</li>
+                            </ul>
+
+                                These screenshots visualize how the tool evolved over the course of 10+ weeks:
+                                <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/moveTerrain.mp4' frameborder='0' allowfullscreen></iframe></div>                                    
+                                <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/generate_random_color_maps.mp4' frameborder='0' allowfullscreen></iframe></div>                                    
+                                <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/mesh_generation.mp4' frameborder='0' allowfullscreen></iframe></div>                                    
+                                <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week8/two_colors.mp4' frameborder='0' allowfullscreen></iframe></div>
+                                <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week9/scroll_rect_et_al.mp4' frameborder='0' allowfullscreen></iframe></div>
+                                <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week10/final_progress.mp4' frameborder='0' allowfullscreen></iframe></div>
+                                <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/week11/black_out_possion.mp4' frameborder='0' allowfullscreen></iframe></div>
+                                <style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='../images/ProceduralGeneration/Week12/clearTerrain.mp4' frameborder='0' allowfullscreen></iframe></div>
+                                <span class="image main"><img src="../images/ProceduralGeneration/toolPreview.gif" alt="" style="width:80%;height:auto;"></span>
+                        </p>
+                        <p>
+                            In the near future, with more time, I would like to implement the following features to the tool:
+                            <ul>
+                                <li>Javascript server code to enable the export of user creations to an external file format (likely .fbx)</li>
+                                <li>The ability to associate different colors with the placement of trees or other small objects</li>
+                                <li>Incorperate shaders onto the color and mesh maps to give user creations a bolder look.</li>
+                                <li>Allow users to import pre-existing meshes into the tool and edit.</li>
+                            </ul>
+                        </p>
+                        <p>
+                            I enjoyed my semester in EECS 499 and would recommend it to other students at the university. It was an insightful experience, and I was
+                            able to gain valuable knowledge of one of the most important technical concepts utilized in the development of large scale games. I would 
+                            especially like to thank my stakeholders Apoorva, Amit, Benoit, and Dr. Mike for their support, as well as the students and faculty in EECS 499
+                            for their feedback and delightful conversations. 
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Scripts -->
+                <script src="../assets/js/jquery.min.js"></script>
+                <script src="../assets/js/browser.min.js"></script>
+                <script src="../assets/js/breakpoints.min.js"></script>
+                <script src="../assets/js/util.js"></script>
+                <script src="../assets/js/main.js"></script>
+        </body>
+    </html>
